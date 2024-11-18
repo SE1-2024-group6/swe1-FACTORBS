@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://0egodccu18mp"]
+
+[ext_resource type="Script" path="res://MainMenu.gd" id="1_dp7o2"]
+[ext_resource type="Texture2D" uid="uid://mwvav080o7vs" path="res://assets/main_menu/title.png" id="1_tku4q"]
+[ext_resource type="Texture2D" uid="uid://ctfewv6bg1lvq" path="res://assets/main_menu/start_button.png" id="2_8dnqb"]
+[ext_resource type="StyleBox" uid="uid://bs1vtn8wqnfv6" path="res://highlight.tres" id="2_s1ioq"]
+[ext_resource type="Texture2D" uid="uid://t3pl38e2d3wb" path="res://assets/main_menu/options_button.png" id="3_gjvnu"]
+[ext_resource type="Texture2D" uid="uid://s53p6bfpehku" path="res://assets/main_menu/quit_button.png" id="4_6iboj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwyab"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dp7o2")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_tku4q")
+stretch_mode = 3
+
+[node name="Subtitle" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "An Educational Game Prototype"
+horizontal_alignment = 1
+
+[node name="MenuOptions" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../OptionsButton")
+focus_next = NodePath("../OptionsButton")
+focus_previous = NodePath("../QuitButton")
+theme_override_styles/hover = ExtResource("2_s1ioq")
+icon = ExtResource("2_8dnqb")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../StartButton")
+theme_override_styles/hover = ExtResource("2_s1ioq")
+icon = ExtResource("3_gjvnu")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/MenuOptions"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../StartButton")
+focus_next = NodePath("../StartButton")
+focus_previous = NodePath("../OptionsButton")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lwyab")
+icon = ExtResource("4_6iboj")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOptions/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOptions/QuitButton" to="." method="_on_quit_button_pressed"]
