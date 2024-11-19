@@ -4,5 +4,5 @@
 
 [node name="Game" type="Node2D"]
 
-[node name="Area2D" parent="." instance=ExtResource("1_klhng")]
+[node name="Cannon" parent="." instance=ExtResource("1_klhng")]
 position = Vector2(500, 500)
