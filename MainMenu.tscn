@@ -91,4 +91,5 @@ icon_alignment = 1
 expand_icon = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOptions/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOptions/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOptions/QuitButton" to="." method="_on_quit_button_pressed"]

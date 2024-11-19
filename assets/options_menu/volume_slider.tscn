@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddqlj1gkxwmxg"]
+
+[ext_resource type="Script" path="res://volume_slider.gd" id="1_c8rvy"]
+
+[node name="volume_slider" type="HSlider"]
+custom_minimum_size = Vector2(400, 0)
+anchors_preset = -1
+anchor_bottom = 0.034
+offset_left = 271.0
+offset_top = 231.0
+offset_right = 671.0
+offset_bottom = 224.968
+max_value = 1.0
+step = 0.001
+script = ExtResource("1_c8rvy")
