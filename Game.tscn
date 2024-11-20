@@ -1,11 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbgl5v0h3ed88"]
+[gd_scene load_steps=7 format=3 uid="uid://cbgl5v0h3ed88"]
 
+[ext_resource type="Texture2D" uid="uid://bik2p5gi32nv1" path="res://assets/game/firstPath.png" id="1_g7gc8"]
 [ext_resource type="PackedScene" uid="uid://dnnlb6wkghg63" path="res://Cannon.tscn" id="1_klhng"]
 [ext_resource type="Script" path="res://game_master.gd" id="1_msvvw"]
 [ext_resource type="Script" path="res://canvas_layer.gd" id="2_2wn40"]
 [ext_resource type="PackedScene" uid="uid://bkbe455gnn8t3" path="res://pause_menu.tscn" id="2_7efwj"]
+[ext_resource type="Texture2D" uid="uid://df7epykyy6yeo" path="res://assets/game/Orb.png" id="2_bro8k"]
 
 [node name="Game" type="Node2D"]
+
+[node name="FirstPath" type="Sprite2D" parent="."]
+position = Vector2(572, 321)
+scale = Vector2(0.605208, 0.616667)
+texture = ExtResource("1_g7gc8")
+
+[node name="Orb" type="Sprite2D" parent="."]
+position = Vector2(301, 336)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_bro8k")
 
 [node name="GameMaster" type="Node2D" parent="."]
 script = ExtResource("1_msvvw")
@@ -17,7 +29,7 @@ theme_override_font_sizes/font_size = 22
 text = " SCORE: "
 
 [node name="Cannon" parent="." instance=ExtResource("1_klhng")]
-position = Vector2(500, 500)
+position = Vector2(600, 300)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
