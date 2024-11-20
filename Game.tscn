@@ -1,8 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbgl5v0h3ed88"]
+[gd_scene load_steps=4 format=3 uid="uid://cbgl5v0h3ed88"]
 
 [ext_resource type="PackedScene" uid="uid://dnnlb6wkghg63" path="res://Cannon.tscn" id="1_klhng"]
+[ext_resource type="Script" path="res://canvas_layer.gd" id="2_2wn40"]
+[ext_resource type="PackedScene" uid="uid://bkbe455gnn8t3" path="res://pause_menu.tscn" id="2_7efwj"]
 
 [node name="Game" type="Node2D"]
 
 [node name="Cannon" parent="." instance=ExtResource("1_klhng")]
 position = Vector2(500, 500)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("2_2wn40")
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("2_7efwj")]
+metadata/_edit_lock_ = true
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+text = "P"
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_button_pressed"]
