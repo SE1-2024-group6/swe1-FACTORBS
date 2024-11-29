@@ -4,8 +4,18 @@ extends Node2D
 
 var current_score = 0
 var previous_score = -1
+var Snake = load("res://scenes/snake.tscn")
 
+func SpawnSnake() -> void:
+	var NewSnake = Snake.instantiate()
+	add_child(NewSnake)
+	NewSnake.Generate(GenerateNumbers())
 
+func GenerateNumbers():
+	return [1,2,3,4]
+
+func _ready() -> void:
+	SpawnSnake()
 
 func _process(delta: float) -> void:
 	update_score()

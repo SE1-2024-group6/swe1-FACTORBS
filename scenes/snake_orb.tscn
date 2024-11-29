@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7vg16fdbgxn"]
+
+[ext_resource type="Script" path="res://scripts/snake_orb.gd" id="1_wigct"]
+[ext_resource type="PackedScene" uid="uid://hidibofjwvdu" path="res://scenes/base_orb.tscn" id="2_f0o15"]
+
+[node name="SnakeOrb" type="PathFollow2D"]
+rotates = false
+loop = false
+script = ExtResource("1_wigct")
+
+[node name="BaseOrb" parent="." instance=ExtResource("2_f0o15")]
