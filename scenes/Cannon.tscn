@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dnnlb6wkghg63"]
 
-[ext_resource type="Script" path="res://cannon.gd" id="1_0hdn4"]
+[ext_resource type="Script" path="res://scripts/cannon.gd" id="1_0hdn4"]
 [ext_resource type="Texture2D" uid="uid://cjy0njej2xnlg" path="res://assets/game/cannon.png" id="2_ntve2"]
 
 [node name="Area2D" type="Area2D"]

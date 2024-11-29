@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cnxg7mpht65to"]
 
-[ext_resource type="Script" path="res://options_menu.gd" id="1_4irqt"]
+[ext_resource type="Script" path="res://scripts/options_menu.gd" id="1_4irqt"]
 [ext_resource type="PackedScene" uid="uid://ddqlj1gkxwmxg" path="res://assets/options_menu/volume_slider.tscn" id="2_lewk4"]
 [ext_resource type="Texture2D" uid="uid://f0iq3mlb0w6a" path="res://assets/options_menu/MainMenuButton.png" id="3_c5d6j"]
 

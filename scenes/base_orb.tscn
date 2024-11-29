@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://hidibofjwvdu"]
+
+[ext_resource type="Script" path="res://scripts/base_orb.gd" id="1_078bu"]
+[ext_resource type="Texture2D" uid="uid://b63ib2i5jsu13" path="res://assets/game/test_orb.png" id="2_eb5er"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_474iu"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[node name="BaseOrb" type="Node2D"]
+script = ExtResource("1_078bu")
+
+[node name="TestOrb" type="Sprite2D" parent="."]
+scale = Vector2(0.366, 0.366)
+texture = ExtResource("2_eb5er")
+
+[node name="NumberLabel" type="Label" parent="."]
+offset_left = -21.0
+offset_top = -25.0
+offset_right = 24.0
+offset_bottom = 20.0
+text = "12"
+label_settings = SubResource("LabelSettings_474iu")
+horizontal_alignment = 1

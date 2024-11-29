@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://0egodccu18mp"]
 
-[ext_resource type="Script" path="res://MainMenu.gd" id="1_dp7o2"]
-[ext_resource type="Texture2D" uid="uid://mwvav080o7vs" path="res://assets/main_menu/title.png" id="1_tku4q"]
-[ext_resource type="Texture2D" uid="uid://ctfewv6bg1lvq" path="res://assets/main_menu/start_button.png" id="2_8dnqb"]
-[ext_resource type="StyleBox" uid="uid://bs1vtn8wqnfv6" path="res://highlight.tres" id="2_s1ioq"]
-[ext_resource type="Texture2D" uid="uid://t3pl38e2d3wb" path="res://assets/main_menu/options_button.png" id="3_gjvnu"]
-[ext_resource type="Texture2D" uid="uid://s53p6bfpehku" path="res://assets/main_menu/quit_button.png" id="4_6iboj"]
+[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_6jm41"]
+[ext_resource type="Texture2D" uid="uid://mwvav080o7vs" path="res://assets/main_menu/title.png" id="2_bs1og"]
+[ext_resource type="StyleBox" uid="uid://bs1vtn8wqnfv6" path="res://highlight.tres" id="3_xx8pg"]
+[ext_resource type="Texture2D" uid="uid://ctfewv6bg1lvq" path="res://assets/main_menu/start_button.png" id="4_qo1rq"]
+[ext_resource type="Texture2D" uid="uid://t3pl38e2d3wb" path="res://assets/main_menu/options_button.png" id="5_wos72"]
+[ext_resource type="Texture2D" uid="uid://s53p6bfpehku" path="res://assets/main_menu/quit_button.png" id="6_w1nyv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwyab"]
 
@@ -16,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_dp7o2")
+script = ExtResource("1_6jm41")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -35,7 +35,7 @@ layout_mode = 2
 
 [node name="Title" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_tku4q")
+texture = ExtResource("2_bs1og")
 stretch_mode = 3
 
 [node name="Subtitle" type="Label" parent="MarginContainer/VBoxContainer"]
@@ -58,8 +58,8 @@ focus_neighbor_top = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../OptionsButton")
 focus_next = NodePath("../OptionsButton")
 focus_previous = NodePath("../QuitButton")
-theme_override_styles/hover = ExtResource("2_s1ioq")
-icon = ExtResource("2_8dnqb")
+theme_override_styles/hover = ExtResource("3_xx8pg")
+icon = ExtResource("4_qo1rq")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -71,8 +71,8 @@ focus_neighbor_top = NodePath("../StartButton")
 focus_neighbor_bottom = NodePath("../QuitButton")
 focus_next = NodePath("../QuitButton")
 focus_previous = NodePath("../StartButton")
-theme_override_styles/hover = ExtResource("2_s1ioq")
-icon = ExtResource("3_gjvnu")
+theme_override_styles/hover = ExtResource("3_xx8pg")
+icon = ExtResource("5_wos72")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -85,7 +85,7 @@ focus_neighbor_bottom = NodePath("../StartButton")
 focus_next = NodePath("../StartButton")
 focus_previous = NodePath("../OptionsButton")
 theme_override_styles/hover = SubResource("StyleBoxFlat_lwyab")
-icon = ExtResource("4_6iboj")
+icon = ExtResource("6_w1nyv")
 flat = true
 icon_alignment = 1
 expand_icon = true

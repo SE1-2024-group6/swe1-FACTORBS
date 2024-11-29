@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://27m3a3xnsbjp"]
+
+[ext_resource type="Script" path="res://scripts/snake.gd" id="1_no3b6"]
+
+[sub_resource type="Curve2D" id="Curve2D_xc5qq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 514, 759, -3.23801, 27.4659, 3.23801, -27.4659, 525, 628, 122.627, 48.6791, -122.627, -48.6791, 437, 488, -98.7939, 93.3381, 98.7939, -93.3381, 362, 146, -38.5929, -22.6274, 38.5929, 22.6274, 689, 119, 27.8751, -113.137, -27.8751, 113.137, 848, 338, 0, 0, 0, 0, 817, 615)
+}
+point_count = 7
+
+[node name="Snake" type="Path2D"]
+curve = SubResource("Curve2D_xc5qq")
+script = ExtResource("1_no3b6")
