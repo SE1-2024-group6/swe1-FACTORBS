@@ -12,7 +12,7 @@ metadata/_edit_lock_ = true
 position = Vector2(0, -1)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_ntve2")
-offset = Vector2(-15, 0)
+offset = Vector2(150, 0)
 
 [node name="PrimaryOrb" parent="." instance=ExtResource("3_ru123")]
 scale = Vector2(0.8, 0.8)
