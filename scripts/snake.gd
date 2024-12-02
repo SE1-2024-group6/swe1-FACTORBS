@@ -42,18 +42,19 @@ func UpdatePosition() -> void:
 
 func SuccessfulCollision(Snorb, Divisor):
 	var Position = -1
+	var Value = Snorb.GetNumber()
 	for i in range(0, len(Body)):
 		if Body[i] == Snorb:
 			Position = i
-	FactorSnorb(Position, Divisor)
 	if Position == -1:
-		print(str(Snorb.GetNumber()))
-	if Snorb.GetNumber() == 1:
-		GameMaster.UpdateScore()
-		call_deferred("DeleteSnorb", Position)
-		#DeleteSnorb(Position, Value)
-	else:
-		call_deferred("InsertSnorb", Snorb.GetNumber(), Position)
+		print(str(Value))
+	var iter = Position
+	while iter+1 < len(Body) and Body[iter+1].GetNumber() == Value:
+		iter += 1
+	FactorSnorb(iter, Divisor)
+	if Value/Divisor != 1:
+		call_deferred("InsertSnorb", int(Value)/int(Divisor), Position)
+	
 
 func FailedCollision(Snorb, Divisor):
 	var Position = -1
@@ -65,11 +66,16 @@ func FailedCollision(Snorb, Divisor):
 
 func FactorSnorb(Position, Divisor):
 	var Value = Body[Position].GetNumber()
-	Body[Position].SetNumber(int(Value)/int(Divisor))
+	Body[Position].SetNumber(Value/Divisor)
+	if Value/Divisor == 1:
+		GameMaster.UpdateScore()
+		call_deferred("DeleteSnorb", Position)
+		#DeleteSnorb(Position, Value)
 	if Position > 0 and Body[Position-1].GetNumber() == Value:
 		FactorSnorb(Position-1, Divisor)
-	if Position+1 < len(Body) and Body[Position+1].GetNumber() == Value:
-		FactorSnorb(Position+1, Divisor)
+	#if Position+1 < len(Body) and Body[Position+1].GetNumber() == Value:
+	#	FactorSnorb(Position+1, Divisor)
+	
 
 func DeleteSnorb(Position):
 	var Snorb = Body[Position]
@@ -80,22 +86,21 @@ func DeleteSnorb(Position):
 		return
 	for i in range(Position, len(Body)):
 		Body[i].UpdateProgress(-OrbSpacing)
-	var iter = Position
-	if Position > 0 and Body[Position-1].GetNumber() == 1:
-		GameMaster.UpdateScore()
-		call_deferred("DeleteSnorb", Position-1)
-		#DeleteSnorb(Position-1)
-	if Position < len(Body) and Body[Position].GetNumber() == 1:
-		GameMaster.UpdateScore()
-		call_deferred("DeleteSnorb", Position)
+#	var iter = Position
+#	if Position > 0 and Body[Position-1].GetNumber() == 1:
+#		GameMaster.UpdateScore()
+#		call_deferred("DeleteSnorb", Position-1)
+#		#DeleteSnorb(Position-1)
+#	if Position < len(Body) and Body[Position].GetNumber() == 1:
+#		GameMaster.UpdateScore()
+#		call_deferred("DeleteSnorb", Position)
 		#DeleteSnorb(Position)
 
 func InsertSnorb(Number, Position):
 	AddOrb(Number, Position)
-	if (Position < len(Body)-1):
-		Body[Position].UpdateProgress(Body[Position+1].progress_ratio)
 	if Position == len(Body)-1:
 		return
+	Body[Position].UpdateProgress(Body[Position+1].progress_ratio)
 	for i in range(Position+1, len(Body)):
 		Body[i].UpdateProgress(OrbSpacing)
 
