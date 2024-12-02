@@ -19,7 +19,7 @@ func SpawnSnake() -> void:
 	add_child(NewSnake)
 	Terrarium.append(NewSnake)
 	NewSnake.Generate(GenerateNumbers())
-	# NewSnake.Generate([4,4,4,4,4])
+	# NewSnake.Generate([4,4,8,4,4])
 	
 
 func GenerateNumbers():

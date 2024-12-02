@@ -2,7 +2,6 @@ extends PathFollow2D
 
 @onready var BaseOrb = $BaseOrb
 var prog = 0 # Allows us to start below zero and collapse the snake
-var SnakePosition
 var Snake
 
 func SetNumber(num) -> void:
