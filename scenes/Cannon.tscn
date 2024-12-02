@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/cannon.gd" id="1_0hdn4"]
 [ext_resource type="Texture2D" uid="uid://cjy0njej2xnlg" path="res://assets/game/cannon.png" id="2_ntve2"]
-[ext_resource type="PackedScene" uid="uid://hidibofjwvdu" path="res://scenes/base_orb.tscn" id="3_ru123"]
+[ext_resource type="PackedScene" uid="uid://hidibofjwvdu" path="res://scenes/BaseOrb.tscn" id="3_ru123"]
 
-[node name="Area2D" type="Area2D"]
+[node name="Cannon" type="Node2D"]
 script = ExtResource("1_0hdn4")
 metadata/_edit_lock_ = true
 
@@ -18,5 +18,5 @@ offset = Vector2(-15, 0)
 scale = Vector2(0.8, 0.8)
 
 [node name="SecondaryOrb" parent="." instance=ExtResource("3_ru123")]
-position = Vector2(-80, 0)
+position = Vector2(-79, 0)
 scale = Vector2(0.6, 0.6)

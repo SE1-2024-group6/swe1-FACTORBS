@@ -15,3 +15,5 @@ script = ExtResource("1_wigct")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseOrb"]
 shape = SubResource("CircleShape2D_rmady")
+
+[connection signal="area_entered" from="BaseOrb" to="." method="_on_base_orb_area_entered"]
