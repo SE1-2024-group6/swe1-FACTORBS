@@ -4,7 +4,7 @@ var SnakeOrb = load("res://scenes/snake_orb.tscn")
 var GameMaster
 var Body = []
 # @export var BaseSpeed : float # Modify through inspector # does not work, inspector rounds to 0 below 0.001
-var BaseSpeed = 0.00012
+var BaseSpeed = 0.00018
 var OrbSpacing = 0.055
 
 func Generate(numbers) -> void:
@@ -98,7 +98,7 @@ func DeleteSnorb(Position):
 
 func InsertSnorb(Number, Position):
 	AddOrb(Number, Position)
-	if Position == len(Body)-1:
+	if Position >= len(Body)-1:
 		return
 	Body[Position].UpdateProgress(Body[Position+1].progress_ratio)
 	for i in range(Position+1, len(Body)):
