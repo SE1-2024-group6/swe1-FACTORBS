@@ -1,7 +1,17 @@
 extends PathFollow2D
 
 @onready var Snake = get_parent()
-var index
+@onready var BaseOrb = $BaseOrb
+var buffered_progress	# used to buffer progress_ratio when negative
+var number:
+	get: return BaseOrb.number
+	set(number): BaseOrb.number = number
+var index:
+	get:
+		for i in Snake.length:
+			if Snake.get_child(i) == self:
+				return i
+		return -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,21 +22,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
-#func UpdateProgress(change) -> void:
-	#prog += change
-	#if (prog > 0):
-		#progress_ratio = prog
-	#else:
-		#progress_ratio = 0
+func UpdateProgress(change) -> void:
+	buffered_progress += change
+	progress_ratio = min(0, buffered_progress)
 #
 func Collide(number) -> void:
 	Snake.Collision(index, number)
-	#if self.number % number == 0:
-		#if index > 0 and Snake.body[index-1] == self.number:
-			#Snake.body[index-1].Collide(number)
-		#if index < Snake.length and Snake.body[index+1] == self.number:
-			#Snake.body[index+1].Collide(number)
-		#
-		#self.number = self.number / number
-	#else:
-		#Snake.add

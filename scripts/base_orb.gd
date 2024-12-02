@@ -4,8 +4,8 @@ extends Node2D
 var number = 0:
 	get:
 		return number
-	set(new_number):
-		number = new_number
+	set(number):
+		self.number = number
 		label.text = str(number)
 
 # Called when the node enters the scene tree for the first time.

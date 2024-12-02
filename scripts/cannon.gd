@@ -36,7 +36,7 @@ func Fire() -> void:
 		return
 	
 	# create projectile orb
-	var ProjectileOrb = load("res://scenes/projectile_orb.tscn").instantiate()
+	var ProjectileOrb = load("res://scenes/ProjectileOrb.tscn").instantiate()
 	get_parent().add_child(ProjectileOrb)
 	ProjectileOrb.SetNumber(primary_orb.GetNumber())
 	ProjectileOrb.direction = Vector2(1.0, 0.0).rotated(angle).normalized()
