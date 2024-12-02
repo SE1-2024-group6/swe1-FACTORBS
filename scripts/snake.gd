@@ -31,12 +31,11 @@ func GetOrb(pos):
 	return Body[pos].GetNumber()
 
 # Currently set to 500% BaseSpeed at start of track and 100% at end with exponential scaling
-# Takes almost exactly 30 seconds to reach the end
 # I think this feels pretty good but I expect it to change when we add orb insertion
 # Mess around with this and find values you think are fun
 func UpdatePosition() -> void: 
 	var ProgressModifier = Body[len(Body)-1].progress_ratio
-	ProgressModifier = 2.3*(1-ProgressModifier)
+	ProgressModifier = 2.5*(1-ProgressModifier)
 	ProgressModifier = ProgressModifier * ProgressModifier 
 	for orb in Body:
 		orb.UpdateProgress(BaseSpeed*(1+ProgressModifier))
@@ -86,14 +85,15 @@ func DeleteSnorb(Position):
 		GameMaster.UpdateScore()
 		call_deferred("DeleteSnorb", Position-1)
 		#DeleteSnorb(Position-1)
-	elif Position < len(Body) and Body[Position].GetNumber() == 1:
+	if Position < len(Body) and Body[Position].GetNumber() == 1:
 		GameMaster.UpdateScore()
 		call_deferred("DeleteSnorb", Position)
 		#DeleteSnorb(Position)
 
 func InsertSnorb(Number, Position):
 	AddOrb(Number, Position)
-	Body[Position].UpdateProgress(Body[Position+1].progress_ratio)
+	if (Position < len(Body)-1):
+		Body[Position].UpdateProgress(Body[Position+1].progress_ratio)
 	if Position == len(Body)-1:
 		return
 	for i in range(Position+1, len(Body)):
