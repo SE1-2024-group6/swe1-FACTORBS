@@ -7,10 +7,10 @@
 font_size = 32
 font_color = Color(0, 0, 0, 1)
 
-[node name="BaseOrb" type="Area2D"]
+[node name="BaseOrb" type="Node2D"]
 script = ExtResource("1_078bu")
 
-[node name="TestOrb" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.366, 0.366)
 texture = ExtResource("2_eb5er")
 

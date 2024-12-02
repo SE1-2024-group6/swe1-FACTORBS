@@ -26,8 +26,8 @@ func GenerateAmmoNumber() -> int:
 		return Snormber
 	
 func SwapAmmo() -> void:
-	var temp = primary_orb.GetNumber()
-	primary_orb.SetNumber(secondary_orb.GetNumber())
+	var temp = primary_orb.number
+	primary_orb.number = secondary_orb.number
 	secondary_orb.SetNumber(temp)
 	
 func Fire() -> void:
