@@ -17,7 +17,7 @@ func GenerateNumbers():
 func _ready() -> void:
 	SpawnSnake()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_score()
 
 # function to update score only when it changes (instead of every frame)

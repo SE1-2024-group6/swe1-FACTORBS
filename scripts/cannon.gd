@@ -1,10 +1,13 @@
-extends Area2D
+extends Node2D
 
 @onready var pause_menu = $"../CanvasLayer/PauseMenu"
 @onready var sprite = $"Sprite2D"
 @onready var primary_orb = $"PrimaryOrb"
 @onready var secondary_orb = $"SecondaryOrb"
 var paused = false
+var angle = 0.0
+var cooldown_time = 0.7
+var on_cooldown = false
 
 # Generate ammo
 func GenerateAmmoNumber() -> int:
@@ -17,16 +20,30 @@ func SwapAmmo() -> void:
 	secondary_orb.SetNumber(temp)
 	
 func Fire() -> void:
+	# do not fire if on cooldown
+	if on_cooldown:
+		return
+	
+	# create projectile orb
+	var ProjectileOrb = load("res://scenes/projectile_orb.tscn").instantiate()
+	get_parent().add_child(ProjectileOrb)
+	ProjectileOrb.SetNumber(primary_orb.GetNumber())
+	ProjectileOrb.direction = Vector2(1.0, 0.0).rotated(angle).normalized()
+	ProjectileOrb.position = position
+	
+	# regenerate ammo
 	primary_orb.SetNumber(secondary_orb.GetNumber())
 	secondary_orb.SetNumber(GenerateAmmoNumber())
-	#TODO: create a projectile orb
+	
+	# set cooldown
+	on_cooldown = true
+	get_tree().create_timer(cooldown_time).timeout.connect(func(): on_cooldown = false)
+	
 
 func OrientCannon() -> void:
-	var mouse_pos = get_global_mouse_position()
-	sprite.look_at(mouse_pos)
-	var angle = global_position.angle_to_point(mouse_pos)
-	secondary_orb.position = Vector2((-80)*cos(angle), (-80)*sin(angle))
-	
+	angle = global_position.angle_to_point(get_global_mouse_position())
+	sprite.rotation = angle
+	secondary_orb.position = Vector2(-79, 0.0).rotated(angle)
 
 # Start with pause menu hidden
 func _ready() -> void:
