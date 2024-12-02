@@ -9,7 +9,7 @@ var Snake = load("res://scenes/snake.tscn")
 var Terrarium = []
 var ValidNumbers = []
 var Random = RandomNumberGenerator.new()
-var TimerLength = 23
+var TimerLength = 28
 
 func SpawnSnake() -> void:
 	if (!SnakeTimer.is_stopped()):
@@ -18,7 +18,8 @@ func SpawnSnake() -> void:
 	var NewSnake = Snake.instantiate()
 	add_child(NewSnake)
 	Terrarium.append(NewSnake)
-	NewSnake.Generate(GenerateNumbers())
+	# NewSnake.Generate(GenerateNumbers())
+	NewSnake.Generate([4,4,4,4,4])
 	
 
 func GenerateNumbers():
@@ -40,7 +41,6 @@ func GetRandomSnorb():
 
 func DeleteSnake(DeadSnake):
 	for i in range(0, len(Terrarium)):
-		print(len(Terrarium))
 		if Terrarium[i] == DeadSnake:
 			Terrarium.remove_at(i)
 			DeadSnake.queue_free()
