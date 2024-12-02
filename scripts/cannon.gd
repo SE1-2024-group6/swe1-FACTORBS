@@ -4,15 +4,26 @@ extends Node2D
 @onready var sprite = $"Sprite2D"
 @onready var primary_orb = $"PrimaryOrb"
 @onready var secondary_orb = $"SecondaryOrb"
+@onready var GameMaster = $"../GameMaster"
 var paused = false
 var angle = 0.0
 var cooldown_time = 0.7
 var on_cooldown = false
+var Random = RandomNumberGenerator.new()
 
 # Generate ammo
 func GenerateAmmoNumber() -> int:
-	return randi_range(1, 9)
-	#TODO: implement ammo generation algorithm
+	var Factors = []
+	var Snormber = GameMaster.GetRandomSnorb()
+	if Snormber == -1:
+		return -1
+	for i in range(2, int(Snormber/2)+1):
+		if Snormber % i == 0:
+			Factors.append(i)
+	if len(Factors) != 0:
+		return Factors[Random.randi_range(1, len(Factors))-1]
+	else:
+		return Snormber
 	
 func SwapAmmo() -> void:
 	var temp = primary_orb.GetNumber()
@@ -48,6 +59,7 @@ func OrientCannon() -> void:
 # Start with pause menu hidden
 func _ready() -> void:
 	pause_menu.hide()
+	Random.randomize()
 	primary_orb.SetNumber(GenerateAmmoNumber())
 	secondary_orb.SetNumber(GenerateAmmoNumber())
 
