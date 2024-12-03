@@ -57,7 +57,7 @@ func DeleteSnorb(index):
 	var Snorb = body[index]
 	Snorb.queue_free()
 	await Snorb.tree_exited
-	if length == 1:
+	if length == 0:
 		GameMaster.DeleteSnake(self)
 	for i in range(index, length):
 		body[i].UpdateProgress(-orb_spacing)
