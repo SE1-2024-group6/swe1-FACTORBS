@@ -2,7 +2,6 @@ extends PathFollow2D
 
 @onready var BaseOrb = $BaseOrb
 var prog = 0 # Allows us to start below zero and collapse the snake
-var SnakePosition
 var Snake
 
 func SetNumber(num) -> void:
@@ -20,8 +19,10 @@ func UpdateProgress(change) -> void:
 
 func Collide(number) -> void:
 	if GetNumber() % number == 0:
-		SetNumber(GetNumber() / number)
-		Snake.SuccessfulCollision(self)
+		# SetNumber(Value / number)
+		Snake.SuccessfulCollision(self, number)
+	else:
+		Snake.FailedCollision(self, number)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
