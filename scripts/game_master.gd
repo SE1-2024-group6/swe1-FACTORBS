@@ -5,7 +5,6 @@ extends Node2D
 
 var current_score = 0
 # var previous_score = -1
-var Snake = load("res://scenes/snake.tscn")
 var terrarium = []
 var num_snakes: int:
 	get: return len(terrarium)
@@ -17,7 +16,7 @@ func SpawnSnake() -> void:
 	if (!SnakeTimer.is_stopped()):
 		SnakeTimer.stop()
 	SnakeTimer.start(TimerLength)
-	var NewSnake = Snake.instantiate()
+	var NewSnake = load("res://scenes/Snake.tscn").instantiate()
 	add_child(NewSnake)
 	terrarium.append(NewSnake)
 	NewSnake.Generate(GenerateNumbers())
@@ -73,8 +72,8 @@ func _ready() -> void:
 #		score_label.text = " SCORE: " + str(current_score)
 #		previous_score = current_score
 
-func UpdateScore():
-	current_score += 1
+func UpdateScore(amount=1):
+	current_score += amount
 	score_label.text = " SCORE: " + str(current_score)
 
 func _on_snake_timer_timeout() -> void:

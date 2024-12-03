@@ -48,7 +48,7 @@ func FactorSnorb(divisor, index):
 	var value = body[index].number
 	body[index].number = value/divisor
 	if value/divisor == 1:
-		GameMaster.UpdateScore()
+		GameMaster.UpdateScore(value)
 		call_deferred("DeleteSnorb", index)
 	if index > 0 and body[index-1].number == value:
 		FactorSnorb(divisor, index-1)
