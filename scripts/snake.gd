@@ -1,6 +1,6 @@
 extends Path2D
 
-@onready var GameMaster = $"../GameMaster"
+@onready var GameMaster = get_parent()
 
 var body:
 	get: return get_children()
@@ -51,14 +51,14 @@ func FactorSnorb(divisor, index):
 		GameMaster.UpdateScore()
 		call_deferred("DeleteSnorb", index)
 	if index > 0 and body[index-1].number == value:
-		FactorSnorb(divisor, index)
+		FactorSnorb(divisor, index-1)
 	
 func DeleteSnorb(index):
 	var Snorb = body[index]
 	Snorb.queue_free()
-	if length == 0:
+	await Snorb.tree_exited
+	if length == 1:
 		GameMaster.DeleteSnake(self)
-		return
 	for i in range(index, length):
 		body[i].UpdateProgress(-orb_spacing)
 
@@ -77,4 +77,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	UpdatePosition()
+	if length != 0:
+		UpdatePosition()

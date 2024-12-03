@@ -2,10 +2,10 @@ extends PathFollow2D
 
 @onready var Snake = get_parent()
 @onready var BaseOrb = $BaseOrb
-var buffered_progress = 0	# used to buffer progress_ratio when negative
-var number: int:
+@onready var number: int:
 	get: return BaseOrb.number
 	set(new_number): BaseOrb.number = new_number
+var buffered_progress = 0	# used to buffer progress_ratio when negative
 var index:
 	get: return get_index()
 

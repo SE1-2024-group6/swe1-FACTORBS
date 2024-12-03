@@ -31,21 +31,21 @@ func GenerateNumbers():
 	return SnakeNumbers
 
 func GetRandomSnormber():
-	var NumSnakes = len(terrarium)
 	var SnakeSelect
-	if NumSnakes == 1:
+	if num_snakes == 1:
 		SnakeSelect = terrarium[0]
-	elif NumSnakes > 1:
-		SnakeSelect = terrarium[Random.randi_range(1, NumSnakes)-1]
+	elif num_snakes > 1:
+		SnakeSelect = terrarium[Random.randi_range(1, num_snakes)-1]
 	else:
-		return -1
+		return 2
 	return SnakeSelect.body[(Random.randi_range(1, SnakeSelect.length)-1)].number
 
 func DeleteSnake(DeadSnake):
-	for i in range(0, len(terrarium)):
+	for i in range(num_snakes):
 		if terrarium[i] == DeadSnake:
 			terrarium.remove_at(i)
 			DeadSnake.queue_free()
+			await DeadSnake.tree_exited
 			if len(terrarium) == 0:
 				call_deferred("SpawnSnake") # Don't ask
 			return

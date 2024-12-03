@@ -14,6 +14,6 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.get_parent().has_method("Collide") and collidable:
-		area.get_parent().Collide(GetNumber())
+		area.get_parent().Collide(number)
 	collidable = false
 	queue_free()
