@@ -14,7 +14,7 @@ var Random = RandomNumberGenerator.new()
 # Generate ammo
 func GenerateAmmoNumber() -> int:
 	var Factors = []
-	var Snormber = GameMaster.GetRandomSnorb()
+	var Snormber = GameMaster.GetRandomSnormber()
 	if Snormber == -1:
 		return -1
 	for i in range(2, int(Snormber/2)+1):
@@ -28,7 +28,7 @@ func GenerateAmmoNumber() -> int:
 func SwapAmmo() -> void:
 	var temp = primary_orb.number
 	primary_orb.number = secondary_orb.number
-	secondary_orb.SetNumber(temp)
+	secondary_orb.number = temp
 	
 func Fire() -> void:
 	# do not fire if on cooldown
@@ -38,13 +38,13 @@ func Fire() -> void:
 	# create projectile orb
 	var ProjectileOrb = load("res://scenes/ProjectileOrb.tscn").instantiate()
 	get_parent().add_child(ProjectileOrb)
-	ProjectileOrb.SetNumber(primary_orb.GetNumber())
+	ProjectileOrb.number = primary_orb.number
 	ProjectileOrb.direction = Vector2(1.0, 0.0).rotated(angle).normalized()
 	ProjectileOrb.position = position
 	
 	# regenerate ammo
-	primary_orb.SetNumber(secondary_orb.GetNumber())
-	secondary_orb.SetNumber(GenerateAmmoNumber())
+	primary_orb.number = secondary_orb.number
+	secondary_orb.number = GenerateAmmoNumber()
 	
 	# set cooldown
 	on_cooldown = true
@@ -60,8 +60,8 @@ func OrientCannon() -> void:
 func _ready() -> void:
 	pause_menu.hide()
 	Random.randomize()
-	primary_orb.SetNumber(GenerateAmmoNumber())
-	secondary_orb.SetNumber(GenerateAmmoNumber())
+	primary_orb.number = GenerateAmmoNumber()
+	secondary_orb.number = GenerateAmmoNumber()
 
 func _input(event):
 	if event.is_action_pressed("swap"):

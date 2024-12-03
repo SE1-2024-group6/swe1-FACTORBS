@@ -1,11 +1,9 @@
 extends Node2D
 
 @onready var label = $NumberLabel
-var number = 0:
-	get:
-		return number
-	set(number):
-		self.number = number
+var number: int = 0:
+	set(new_number):
+		number = new_number
 		label.text = str(number)
 
 # Called when the node enters the scene tree for the first time.

@@ -6,7 +6,9 @@ extends Node2D
 var current_score = 0
 # var previous_score = -1
 var Snake = load("res://scenes/snake.tscn")
-var Terrarium = []
+var terrarium = []
+var num_snakes: int:
+	get: return len(terrarium)
 var ValidNumbers = []
 var Random = RandomNumberGenerator.new()
 var TimerLength = 33
@@ -17,7 +19,7 @@ func SpawnSnake() -> void:
 	SnakeTimer.start(TimerLength)
 	var NewSnake = Snake.instantiate()
 	add_child(NewSnake)
-	Terrarium.append(NewSnake)
+	terrarium.append(NewSnake)
 	NewSnake.Generate(GenerateNumbers())
 	# NewSnake.Generate([4,4,4,4,4])
 	
@@ -28,23 +30,23 @@ func GenerateNumbers():
 		SnakeNumbers.append(ValidNumbers[Random.randi_range(0, 25)]) #also make difficulty variable
 	return SnakeNumbers
 
-func GetRandomSnorb():
-	var NumSnakes = len(Terrarium)
+func GetRandomSnormber():
+	var NumSnakes = len(terrarium)
 	var SnakeSelect
 	if NumSnakes == 1:
-		SnakeSelect = Terrarium[0]
+		SnakeSelect = terrarium[0]
 	elif NumSnakes > 1:
-		SnakeSelect = Terrarium[Random.randi_range(1, NumSnakes)-1]
+		SnakeSelect = terrarium[Random.randi_range(1, NumSnakes)-1]
 	else:
 		return -1
-	return SnakeSelect.GetOrb(Random.randi_range(1, SnakeSelect.GetLength())-1)
+	return SnakeSelect.body[(Random.randi_range(1, SnakeSelect.length)-1)].number
 
 func DeleteSnake(DeadSnake):
-	for i in range(0, len(Terrarium)):
-		if Terrarium[i] == DeadSnake:
-			Terrarium.remove_at(i)
+	for i in range(0, len(terrarium)):
+		if terrarium[i] == DeadSnake:
+			terrarium.remove_at(i)
 			DeadSnake.queue_free()
-			if len(Terrarium) == 0:
+			if len(terrarium) == 0:
 				call_deferred("SpawnSnake") # Don't ask
 			return
 		else:
