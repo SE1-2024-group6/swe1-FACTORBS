@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/game_master.gd" id="3_8pvaq"]
 [ext_resource type="PackedScene" uid="uid://dnnlb6wkghg63" path="res://scenes/Cannon.tscn" id="4_glvar"]
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="5_hxki1"]
-[ext_resource type="PackedScene" uid="uid://bkbe455gnn8t3" path="res://scenes/pause_menu.tscn" id="6_8gwbn"]
+[ext_resource type="PackedScene" uid="uid://bkbe455gnn8t3" path="res://scenes/PauseMenu.tscn" id="6_8gwbn"]
 
 [node name="Game" type="Node2D"]
 

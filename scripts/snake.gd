@@ -1,108 +1,73 @@
 extends Path2D
 
-var SnakeOrb = load("res://scenes/snake_orb.tscn")
-var GameMaster
-var Body = []
-# @export var BaseSpeed : float # Modify through inspector # does not work, inspector rounds to 0 below 0.001
-var BaseSpeed = 0.00018
-var OrbSpacing = 0.055
+@onready var GameMaster = get_parent()
+
+var body:
+	get: return get_children()
+var length:
+	get: return get_child_count()
+var base_speed = 0.00018
+var orb_spacing = 0.055
 
 func Generate(numbers) -> void:
 	for i in numbers:
 		AddOrb(i, 0)
-	var NumOrbs = len(Body)
-	for j in range(NumOrbs):
-		Body[j].prog = 0 - OrbSpacing*(NumOrbs-j-1)
+	for j in range(length):
+		body[j].buffered_progress = 0 - orb_spacing*(length-j-1)
 
-func AddOrb(num, pos) -> void:
-	var NewOrb = SnakeOrb.instantiate()
+func AddOrb(number, index) -> void:
+	var NewOrb = load("res://scenes/SnakeOrb.tscn").instantiate()
 	add_child(NewOrb)
-	NewOrb.SetNumber(num)
-	if (pos == -1):
-		Body.append(NewOrb)
-	else:
-		Body.insert(pos, NewOrb)
-	
+	move_child(NewOrb, index)
+	NewOrb.number = number
 
-func GetLength():
-	return len(Body)
-
-func GetOrb(pos):
-	return Body[pos].GetNumber()
-
-# Currently set to 500% BaseSpeed at start of track and 100% at end with exponential scaling
+# Currently set to 500% base_speed at start of track and 100% at end with exponential scaling
 # I think this feels pretty good but I expect it to change when we add orb insertion
 # Mess around with this and find values you think are fun
 func UpdatePosition() -> void: 
-	var ProgressModifier = Body[len(Body)-1].progress_ratio
-	ProgressModifier = 2.5*(1-ProgressModifier)
-	ProgressModifier = ProgressModifier * ProgressModifier 
-	for orb in Body:
-		orb.UpdateProgress(BaseSpeed*(1+ProgressModifier))
+	var progress_modifier = body[length-1].progress_ratio
+	progress_modifier = 2.5*(1-progress_modifier)
+	progress_modifier = progress_modifier * progress_modifier 
+	for orb in body:
+		orb.UpdateProgress(base_speed*(1+progress_modifier))
 
-func SuccessfulCollision(Snorb, Divisor):
-	var Position = -1
-	var Value = Snorb.GetNumber()
-	for i in range(0, len(Body)):
-		if Body[i] == Snorb:
-			Position = i
-	if Position == -1:
-		print(str(Value))
-	var iter = Position
-	while iter+1 < len(Body) and Body[iter+1].GetNumber() == Value:
-		iter += 1
-	FactorSnorb(iter, Divisor)
-	if Value/Divisor != 1:
-		call_deferred("InsertSnorb", int(Value)/int(Divisor), Position)
+func Collision(divisor, index):
+	var value = body[index].number	# value = number of orb at index
+	if value % divisor == 0:	# if the divisor is a factor of the orb hit
+		# recursively factor all contigouos orbs of the same value
+		var iter = index
+		while iter+1 < length and body[iter+1].number == value:
+			iter += 1
+		FactorSnorb(divisor, iter)
+		if value/divisor != 1:
+			call_deferred("InsertSnorb", int(value)/int(divisor), index)
+	else:	# if the divisor isn't a factor of the orb hit
+		call_deferred("InsertSnorb", divisor, index)	# insert it into the snake
+
+func FactorSnorb(divisor, index):
+	var value = body[index].number
+	body[index].number = value/divisor
+	if value/divisor == 1:
+		GameMaster.UpdateScore(value)
+		call_deferred("DeleteSnorb", index)
+	if index > 0 and body[index-1].number == value:
+		FactorSnorb(divisor, index-1)
 	
-
-func FailedCollision(Snorb, Divisor):
-	var Position = -1
-	for i in range(0, len(Body)):
-		if Body[i] == Snorb:
-			Position = i
-	call_deferred("InsertSnorb", Divisor, Position)
-	# InsertSnorb(Divisor, Position)
-
-func FactorSnorb(Position, Divisor):
-	var Value = Body[Position].GetNumber()
-	Body[Position].SetNumber(Value/Divisor)
-	if Value/Divisor == 1:
-		GameMaster.UpdateScore()
-		call_deferred("DeleteSnorb", Position)
-		#DeleteSnorb(Position, Value)
-	if Position > 0 and Body[Position-1].GetNumber() == Value:
-		FactorSnorb(Position-1, Divisor)
-	#if Position+1 < len(Body) and Body[Position+1].GetNumber() == Value:
-	#	FactorSnorb(Position+1, Divisor)
-	
-
-func DeleteSnorb(Position):
-	var Snorb = Body[Position]
-	Body.remove_at(Position)
+func DeleteSnorb(index):
+	var Snorb = body[index]
 	Snorb.queue_free()
-	if len(Body) == 0:
+	await Snorb.tree_exited
+	if length == 0:
 		GameMaster.DeleteSnake(self)
-		return
-	for i in range(Position, len(Body)):
-		Body[i].UpdateProgress(-OrbSpacing)
-#	var iter = Position
-#	if Position > 0 and Body[Position-1].GetNumber() == 1:
-#		GameMaster.UpdateScore()
-#		call_deferred("DeleteSnorb", Position-1)
-#		#DeleteSnorb(Position-1)
-#	if Position < len(Body) and Body[Position].GetNumber() == 1:
-#		GameMaster.UpdateScore()
-#		call_deferred("DeleteSnorb", Position)
-		#DeleteSnorb(Position)
+	for i in range(index, length):
+		body[i].UpdateProgress(-orb_spacing)
 
-func InsertSnorb(Number, Position):
-	AddOrb(Number, Position)
-	if Position >= len(Body)-1:
-		return
-	Body[Position].UpdateProgress(Body[Position+1].progress_ratio)
-	for i in range(Position+1, len(Body)):
-		Body[i].UpdateProgress(OrbSpacing)
+func InsertSnorb(number, index):
+	AddOrb(number, index)
+	if index < length-1:
+		body[index].UpdateProgress(body[index+1].progress_ratio)
+		for i in range(index+1, length):
+			body[i].UpdateProgress(orb_spacing)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -112,5 +77,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	UpdatePosition()
-	pass
+	if length != 0:
+		UpdatePosition()

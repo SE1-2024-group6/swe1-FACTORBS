@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://2j64yyj0qgyd"]
+
+[ext_resource type="PackedScene" uid="uid://hidibofjwvdu" path="res://scenes/BaseOrb.tscn" id="1_pcdqg"]
+[ext_resource type="Script" path="res://scripts/projectile_orb.gd" id="2_jbrv4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_72d3g"]
+radius = 48.0
+
+[node name="ProjectileOrb" instance=ExtResource("1_pcdqg")]
+script = ExtResource("2_jbrv4")
+
+[node name="Area2D" type="Area2D" parent="." index="2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_72d3g")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]

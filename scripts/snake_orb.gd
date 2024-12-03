@@ -1,35 +1,26 @@
 extends PathFollow2D
 
+@onready var Snake = get_parent()
 @onready var BaseOrb = $BaseOrb
-var prog = 0 # Allows us to start below zero and collapse the snake
-var Snake
-
-func SetNumber(num) -> void:
-	BaseOrb.SetNumber(num)
-
-func GetNumber() -> int:
-	return BaseOrb.GetNumber()
-
-func UpdateProgress(change) -> void:
-	prog += change
-	if (prog > 0):
-		progress_ratio = prog
-	else:
-		progress_ratio = 0
-
-func Collide(number) -> void:
-	if GetNumber() % number == 0:
-		# SetNumber(Value / number)
-		Snake.SuccessfulCollision(self, number)
-	else:
-		Snake.FailedCollision(self, number)
+@onready var number: int:
+	get: return BaseOrb.number
+	set(new_number): BaseOrb.number = new_number
+var buffered_progress = 0	# used to buffer progress_ratio when negative
+var index:
+	get: return get_index()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Snake = get_parent()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+func UpdateProgress(change) -> void:
+	buffered_progress += change
+	progress_ratio = max(0, buffered_progress)
+
+func Collide(number) -> void:
+	Snake.Collision(number, index)

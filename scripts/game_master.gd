@@ -5,8 +5,9 @@ extends Node2D
 
 var current_score = 0
 # var previous_score = -1
-var Snake = load("res://scenes/snake.tscn")
-var Terrarium = []
+var terrarium = []
+var num_snakes: int:
+	get: return len(terrarium)
 var ValidNumbers = []
 var Random = RandomNumberGenerator.new()
 var TimerLength = 33
@@ -15,9 +16,9 @@ func SpawnSnake() -> void:
 	if (!SnakeTimer.is_stopped()):
 		SnakeTimer.stop()
 	SnakeTimer.start(TimerLength)
-	var NewSnake = Snake.instantiate()
+	var NewSnake = load("res://scenes/Snake.tscn").instantiate()
 	add_child(NewSnake)
-	Terrarium.append(NewSnake)
+	terrarium.append(NewSnake)
 	NewSnake.Generate(GenerateNumbers())
 	# NewSnake.Generate([4,4,8,4,4])
 	
@@ -28,23 +29,23 @@ func GenerateNumbers():
 		SnakeNumbers.append(ValidNumbers[Random.randi_range(0, 25)]) #also make difficulty variable
 	return SnakeNumbers
 
-func GetRandomSnorb():
-	var NumSnakes = len(Terrarium)
+func GetRandomSnormber():
 	var SnakeSelect
-	if NumSnakes == 1:
-		SnakeSelect = Terrarium[0]
-	elif NumSnakes > 1:
-		SnakeSelect = Terrarium[Random.randi_range(1, NumSnakes)-1]
+	if num_snakes == 1:
+		SnakeSelect = terrarium[0]
+	elif num_snakes > 1:
+		SnakeSelect = terrarium[Random.randi_range(1, num_snakes)-1]
 	else:
-		return -1
-	return SnakeSelect.GetOrb(Random.randi_range(1, SnakeSelect.GetLength())-1)
+		return 2
+	return SnakeSelect.body[(Random.randi_range(1, SnakeSelect.length)-1)].number
 
 func DeleteSnake(DeadSnake):
-	for i in range(0, len(Terrarium)):
-		if Terrarium[i] == DeadSnake:
-			Terrarium.remove_at(i)
+	for i in range(num_snakes):
+		if terrarium[i] == DeadSnake:
+			terrarium.remove_at(i)
 			DeadSnake.queue_free()
-			if len(Terrarium) == 0:
+			await DeadSnake.tree_exited
+			if len(terrarium) == 0:
 				call_deferred("SpawnSnake") # Don't ask
 			return
 		else:
@@ -71,8 +72,8 @@ func _ready() -> void:
 #		score_label.text = " SCORE: " + str(current_score)
 #		previous_score = current_score
 
-func UpdateScore():
-	current_score += 1
+func UpdateScore(amount=1):
+	current_score += amount
 	score_label.text = " SCORE: " + str(current_score)
 
 func _on_snake_timer_timeout() -> void:
