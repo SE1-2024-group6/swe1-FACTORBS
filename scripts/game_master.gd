@@ -24,9 +24,9 @@ func SpawnSnake() -> void:
 	# NewSnake.Generate([4,4,8,4,4])
 	
 
-func GenerateNumbers():
+func GenerateNumbers(amount=5):
 	var SnakeNumbers = []
-	for i in range(5): # make variable when difficulty is implemented
+	for i in range(amount): # make variable when difficulty is implemented
 		SnakeNumbers.append(ValidNumbers[Random.randi_range(0, 25)]) #also make difficulty variable
 	return SnakeNumbers
 
