@@ -11,7 +11,7 @@ var num_snakes: int:
 	get: return len(terrarium)
 var ValidNumbers = []
 var Random = RandomNumberGenerator.new()
-var TimerLength = 33
+var TimerLength = 22
 
 func SpawnSnake() -> void:
 	if (!SnakeTimer.is_stopped()):
