@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkbe455gnn8t3"]
+[gd_scene load_steps=11 format=3 uid="uid://bkbe455gnn8t3"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_1kfw5"]
 [ext_resource type="Texture2D" uid="uid://tgvv56e4dluf" path="res://assets/pause_menu/ResumeButton.png" id="1_yffx1"]
 [ext_resource type="Texture2D" uid="uid://fmjpuy6fnldd" path="res://assets/pause_menu/RestartButton.png" id="2_467vr"]
 [ext_resource type="Shader" path="res://pause_menu.gdshader" id="2_ega7c"]
 [ext_resource type="Texture2D" uid="uid://f0iq3mlb0w6a" path="res://assets/options_menu/MainMenuButton.png" id="3_i3x24"]
+[ext_resource type="Texture2D" uid="uid://oo3tt5i6hoiq" path="res://assets/pause_menu/pauseText.png" id="6_dugkt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mej5l"]
 shader = ExtResource("2_ega7c")
@@ -34,18 +35,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="pausePlaceholder" type="Label" parent="."]
-layout_mode = 0
-offset_left = 538.5
-offset_top = 80.0
-offset_right = 613.5
-offset_bottom = 114.0
-theme_override_font_sizes/font_size = 24
-text = "PAUSE"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_lock_ = true
 
 [node name="resume" type="Button" parent="."]
 layout_mode = 0
@@ -79,6 +68,11 @@ scale = Vector2(0.45, 0.45)
 theme_override_styles/hover = SubResource("StyleBoxFlat_g2qvp")
 icon = ExtResource("3_i3x24")
 metadata/_edit_lock_ = true
+
+[node name="PauseText" type="Sprite2D" parent="."]
+position = Vector2(584, 99)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_dugkt")
 
 [connection signal="pressed" from="resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="restart" to="." method="_on_restart_pressed"]

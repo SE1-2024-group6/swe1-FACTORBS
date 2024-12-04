@@ -70,6 +70,9 @@ func InsertSnorb(number, index):
 		for i in range(index+1, length):
 			body[i].UpdateProgress(orb_spacing)
 
+func GameOver():
+	GameMaster.GameOver()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameMaster = get_parent()

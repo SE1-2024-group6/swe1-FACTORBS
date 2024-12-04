@@ -3,6 +3,7 @@ extends Node2D
 var Path: Curve2D = preload("res://resources/Path1.tres")
 @onready var score_label = $"Score"
 @onready var SnakeTimer = $"SnakeTimer"
+@onready var Game_over_menu = $"../CanvasLayer2/GameOverMenu"
 
 var current_score = 0
 # var previous_score = -1
@@ -52,7 +53,12 @@ func DeleteSnake(DeadSnake):
 		else:
 			print("Failed to kill snake")
 
+func GameOver():
+	get_tree().paused = true
+	Game_over_menu.show()
+
 func _ready() -> void:
+	Game_over_menu.hide()
 	Random.randomize()
 	score_label.text = " SCORE: 0" 
 	var Primes = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]
