@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgtlnb811ctbi"]
+
+[ext_resource type="Script" path="res://scripts/game_over_menu.gd" id="1_17rwi"]
+[ext_resource type="Shader" path="res://pause_menu.gdshader" id="1_fm8kx"]
+[ext_resource type="Texture2D" uid="uid://f0iq3mlb0w6a" path="res://assets/options_menu/MainMenuButton.png" id="3_17yrg"]
+[ext_resource type="Texture2D" uid="uid://fmjpuy6fnldd" path="res://assets/pause_menu/RestartButton.png" id="4_ukmjm"]
+[ext_resource type="Texture2D" uid="uid://ddvvmqbf3srjd" path="res://assets/game_over_menu/GameOverText.png" id="5_g7hhb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oiprk"]
+shader = ExtResource("1_fm8kx")
+shader_parameter/amount = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht323"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sqn5d"]
+
+[node name="GameOverMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_17rwi")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_oiprk")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="restart" type="Button" parent="."]
+offset_left = 439.0
+offset_top = 170.0
+offset_right = 1047.0
+offset_bottom = 378.0
+scale = Vector2(0.45, 0.45)
+theme_override_styles/hover = SubResource("StyleBoxFlat_ht323")
+icon = ExtResource("4_ukmjm")
+
+[node name="mainMenu" type="Button" parent="."]
+offset_left = 439.0
+offset_top = 305.0
+offset_right = 1047.0
+offset_bottom = 513.0
+scale = Vector2(0.45, 0.45)
+theme_override_styles/hover = SubResource("StyleBoxFlat_sqn5d")
+icon = ExtResource("3_17yrg")
+
+[node name="GameOverText" type="Sprite2D" parent="."]
+position = Vector2(528, 97)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_g7hhb")
+
+[connection signal="pressed" from="restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="mainMenu" to="." method="_on_main_menu_pressed"]

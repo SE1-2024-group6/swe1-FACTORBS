@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbgl5v0h3ed88"]
+[gd_scene load_steps=7 format=3 uid="uid://cbgl5v0h3ed88"]
 
 [ext_resource type="Texture2D" uid="uid://ccmfwm8nnog1m" path="res://assets/game/path1.png" id="1_0hp1r"]
 [ext_resource type="Script" path="res://scripts/game_master.gd" id="3_8pvaq"]
 [ext_resource type="PackedScene" uid="uid://dnnlb6wkghg63" path="res://scenes/Cannon.tscn" id="4_glvar"]
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="5_hxki1"]
 [ext_resource type="PackedScene" uid="uid://bkbe455gnn8t3" path="res://scenes/PauseMenu.tscn" id="6_8gwbn"]
+[ext_resource type="PackedScene" uid="uid://cgtlnb811ctbi" path="res://scenes/GameOverMenu.tscn" id="6_xnw7r"]
 
 [node name="Game" type="Node2D"]
 
@@ -32,7 +33,6 @@ scale = Vector2(0.8, 0.8)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
 script = ExtResource("5_hxki1")
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_8gwbn")]
@@ -44,6 +44,11 @@ offset_right = 1152.0
 offset_bottom = 40.0
 text = "P"
 metadata/_edit_lock_ = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="GameOverMenu" parent="CanvasLayer2" instance=ExtResource("6_xnw7r")]
 
 [connection signal="timeout" from="GameMaster/SnakeTimer" to="GameMaster" method="_on_snake_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_button_pressed"]
