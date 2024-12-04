@@ -1,5 +1,6 @@
 extends Node2D
 
+var Path: Curve2D = preload("res://resources/Path1.tres")
 @onready var score_label = $"Score"
 @onready var SnakeTimer = $"SnakeTimer"
 
@@ -19,7 +20,7 @@ func SpawnSnake() -> void:
 	var NewSnake = load("res://scenes/Snake.tscn").instantiate()
 	add_child(NewSnake)
 	terrarium.append(NewSnake)
-	NewSnake.Generate(GenerateNumbers())
+	NewSnake.Generate(GenerateNumbers(), Path)
 	# NewSnake.Generate([4,4,8,4,4])
 	
 

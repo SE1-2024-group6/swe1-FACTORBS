@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://hidibofjwvdu" path="res://scenes/BaseOrb.tscn" id="2_kf8my"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tq2cd"]
-radius = 48.0
+radius = 35.0
 
 [node name="SnakeOrb" type="PathFollow2D"]
 rotates = false
@@ -12,6 +12,7 @@ loop = false
 script = ExtResource("1_fo5ip")
 
 [node name="BaseOrb" parent="." instance=ExtResource("2_kf8my")]
+scale = Vector2(0.8, 0.8)
 
 [node name="Area2D" type="Area2D" parent="."]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cbgl5v0h3ed88"]
 
-[ext_resource type="Texture2D" uid="uid://bik2p5gi32nv1" path="res://assets/game/firstPath.png" id="1_cjmpp"]
+[ext_resource type="Texture2D" uid="uid://ccmfwm8nnog1m" path="res://assets/game/path1.png" id="1_0hp1r"]
 [ext_resource type="Script" path="res://scripts/game_master.gd" id="3_8pvaq"]
 [ext_resource type="PackedScene" uid="uid://dnnlb6wkghg63" path="res://scenes/Cannon.tscn" id="4_glvar"]
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="5_hxki1"]
@@ -8,10 +8,11 @@
 
 [node name="Game" type="Node2D"]
 
-[node name="FirstPath" type="Sprite2D" parent="."]
-position = Vector2(572, 321)
-scale = Vector2(0.605208, 0.616667)
-texture = ExtResource("1_cjmpp")
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(575, 336)
+scale = Vector2(0.9, 0.918)
+texture = ExtResource("1_0hp1r")
+metadata/_edit_lock_ = true
 
 [node name="GameMaster" type="Node2D" parent="."]
 script = ExtResource("3_8pvaq")
@@ -26,10 +27,12 @@ text = " SCORE: "
 wait_time = 26.0
 
 [node name="Cannon" parent="." instance=ExtResource("4_glvar")]
-position = Vector2(600, 300)
+position = Vector2(556, 164)
+scale = Vector2(0.8, 0.8)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
+visible = false
 script = ExtResource("5_hxki1")
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("6_8gwbn")]

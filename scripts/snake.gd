@@ -6,10 +6,11 @@ var body:
 	get: return get_children()
 var length:
 	get: return get_child_count()
-var base_speed = 0.00018
-var orb_spacing = 0.055
+var base_speed = 0.00007
+var orb_spacing = 0.0165
 
-func Generate(numbers) -> void:
+func Generate(numbers, path=curve) -> void:
+	curve = path
 	for i in numbers:
 		AddOrb(i, 0)
 	for j in range(length):

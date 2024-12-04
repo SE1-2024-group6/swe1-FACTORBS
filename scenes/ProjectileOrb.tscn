@@ -7,6 +7,7 @@
 radius = 48.0
 
 [node name="ProjectileOrb" instance=ExtResource("1_pcdqg")]
+scale = Vector2(0.8, 0.8)
 script = ExtResource("2_jbrv4")
 
 [node name="Area2D" type="Area2D" parent="." index="2"]

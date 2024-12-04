@@ -1,7 +1,7 @@
 extends "res://scripts/base_orb.gd"
 
 var direction = Vector2(1.0, 0.0)
-var speed = 500.0
+var speed = 1000.0
 var collidable = true
 
 # Called when the node enters the scene tree for the first time.
