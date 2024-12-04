@@ -1,5 +1,6 @@
 extends Node2D
 
+var Path: Curve2D = preload("res://resources/Path1.tres")
 @onready var score_label = $"Score"
 @onready var SnakeTimer = $"SnakeTimer"
 
@@ -10,7 +11,7 @@ var num_snakes: int:
 	get: return len(terrarium)
 var ValidNumbers = []
 var Random = RandomNumberGenerator.new()
-var TimerLength = 33
+var TimerLength = 22
 
 func SpawnSnake() -> void:
 	if (!SnakeTimer.is_stopped()):
@@ -19,7 +20,7 @@ func SpawnSnake() -> void:
 	var NewSnake = load("res://scenes/Snake.tscn").instantiate()
 	add_child(NewSnake)
 	terrarium.append(NewSnake)
-	NewSnake.Generate(GenerateNumbers())
+	NewSnake.Generate(GenerateNumbers(), Path)
 	# NewSnake.Generate([4,4,8,4,4])
 	
 

@@ -6,10 +6,11 @@ var body:
 	get: return get_children()
 var length:
 	get: return get_child_count()
-var base_speed = 0.00018
-var orb_spacing = 0.055
+var base_speed = 0.00013
+var orb_spacing = 0.0165
 
-func Generate(numbers) -> void:
+func Generate(numbers, path=curve) -> void:
+	curve = path
 	for i in numbers:
 		AddOrb(i, 0)
 	for j in range(length):
@@ -26,7 +27,7 @@ func AddOrb(number, index) -> void:
 # Mess around with this and find values you think are fun
 func UpdatePosition() -> void: 
 	var progress_modifier = body[length-1].progress_ratio
-	progress_modifier = 2.5*(1-progress_modifier)
+	progress_modifier = 2.7*(1-progress_modifier)
 	progress_modifier = progress_modifier * progress_modifier 
 	for orb in body:
 		orb.UpdateProgress(base_speed*(1+progress_modifier))
