@@ -6,7 +6,7 @@ var body:
 	get: return get_children()
 var length:
 	get: return get_child_count()
-var base_speed = 0.00007
+var base_speed = 0.00009
 var orb_spacing = 0.0165
 
 func Generate(numbers, path=curve) -> void:
@@ -23,14 +23,15 @@ func AddOrb(number, index) -> void:
 	NewOrb.number = number
 
 # Currently set to 500% base_speed at start of track and 100% at end with exponential scaling
+# Update: base_speed now increases up to double its original value as difficulty_ratio increases
 # I think this feels pretty good but I expect it to change when we add orb insertion
 # Mess around with this and find values you think are fun
 func UpdatePosition() -> void: 
 	var progress_modifier = body[length-1].progress_ratio
-	progress_modifier = 2.7*(1-progress_modifier)
+	progress_modifier = 3.3*(1-progress_modifier)
 	progress_modifier = progress_modifier * progress_modifier 
 	for orb in body:
-		orb.UpdateProgress(base_speed*(1+progress_modifier))
+		orb.UpdateProgress((base_speed+base_speed*GameMaster.difficulty_ratio*0.5)*(1+progress_modifier))
 
 func Collision(divisor, index):
 	var value = body[index].number	# value = number of orb at index
@@ -49,7 +50,8 @@ func FactorSnorb(divisor, index):
 	var value = body[index].number
 	body[index].number = value/divisor
 	if value/divisor == 1:
-		GameMaster.UpdateScore(value)
+		#GameMaster.UpdateScore(value)
+		GameMaster.UpdateScore()
 		call_deferred("DeleteSnorb", index)
 	if index > 0 and body[index-1].number == value:
 		FactorSnorb(divisor, index-1)

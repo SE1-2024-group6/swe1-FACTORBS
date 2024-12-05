@@ -7,17 +7,18 @@ var Path: Curve2D = preload("res://resources/Path1.tres")
 
 var current_score = 0
 # var previous_score = -1
+var difficulty_ratio = 0
 var terrarium = []
 var num_snakes: int:
 	get: return len(terrarium)
 var ValidNumbers = []
 var Random = RandomNumberGenerator.new()
-var TimerLength = 22
+var TimerLength = 21
 
 func SpawnSnake() -> void:
 	if (!SnakeTimer.is_stopped()):
 		SnakeTimer.stop()
-	SnakeTimer.start(TimerLength)
+	SnakeTimer.start(TimerLength+10*difficulty_ratio)
 	var NewSnake = load("res://scenes/Snake.tscn").instantiate()
 	add_child(NewSnake)
 	terrarium.append(NewSnake)
@@ -27,8 +28,14 @@ func SpawnSnake() -> void:
 
 func GenerateNumbers():
 	var SnakeNumbers = []
-	for i in range(5): # make variable when difficulty is implemented
-		SnakeNumbers.append(ValidNumbers[Random.randi_range(0, 25)]) #also make difficulty variable
+	var SnakeLength = 4
+	if current_score > 60:
+		SnakeLength = 6
+	elif current_score > 20:
+		SnakeLength = 5
+	#for i in range(4+int(2*difficulty_ratio)):
+	for i in range(SnakeLength):
+		SnakeNumbers.append(ValidNumbers[Random.randi_range(0, 20+(40*difficulty_ratio))])
 	return SnakeNumbers
 
 func GetRandomSnormber():
@@ -82,6 +89,10 @@ func _ready() -> void:
 func UpdateScore(amount=1):
 	current_score += amount
 	score_label.text = " SCORE: " + str(current_score)
+	if current_score < 150:
+		difficulty_ratio = current_score/150.0
+	else:
+		difficulty_ratio = 1
 
 func _on_snake_timer_timeout() -> void:
 	call_deferred("SpawnSnake")
