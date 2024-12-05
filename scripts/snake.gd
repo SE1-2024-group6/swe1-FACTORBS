@@ -6,7 +6,7 @@ var body:
 	get: return get_children()
 var length:
 	get: return get_child_count()
-var base_speed = 0.00013
+var base_speed = 0.00007
 var orb_spacing = 0.0165
 
 func Generate(numbers, path=curve) -> void:
@@ -59,16 +59,29 @@ func DeleteSnorb(index):
 	Snorb.queue_free()
 	await Snorb.tree_exited
 	if length == 0:
-		GameMaster.DeleteSnake(self)
+		GameMaster.call_deferred("DeleteSnake", self)
 	for i in range(index, length):
 		body[i].UpdateProgress(-orb_spacing)
 
 func InsertSnorb(number, index):
+	index += 1
 	AddOrb(number, index)
-	if index < length-1:
+	if index < length - 1:
 		body[index].UpdateProgress(body[index+1].progress_ratio)
 		for i in range(index+1, length):
 			body[i].UpdateProgress(orb_spacing)
+	else:
+		body[index].UpdateProgress(body[index-1].progress_ratio + orb_spacing)
+
+# Merge another snake into this one
+func Merge(OtherSnake):
+	if self == OtherSnake:
+		return
+	# Insert all orbs from OtherSnake into this Snake.
+	for i in range(OtherSnake.length - 1, -1, -1):
+		call_deferred("InsertSnorb", OtherSnake.body[i].number, length-1)
+	# Remove old snake
+	GameMaster.call_deferred("DeleteSnake", OtherSnake)
 
 func GameOver():
 	GameMaster.GameOver()

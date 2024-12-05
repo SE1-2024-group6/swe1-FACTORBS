@@ -26,3 +26,8 @@ func UpdateProgress(change) -> void:
 
 func Collide(number) -> void:
 	Snake.Collision(number, index)
+
+func _on_snake_collision(area: Area2D) -> void:
+	if index == (Snake.length - 1) and area.get_parent().is_in_group("SnakeOrbs"):
+		Snake.Merge(area.get_parent().Snake)
+		

@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_tq2cd"]
 radius = 35.0
 
-[node name="SnakeOrb" type="PathFollow2D"]
+[node name="SnakeOrb" type="PathFollow2D" groups=["SnakeOrbs"]]
 rotates = false
 loop = false
 script = ExtResource("1_fo5ip")
@@ -18,3 +18,5 @@ scale = Vector2(0.8, 0.8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_tq2cd")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_snake_collision"]
