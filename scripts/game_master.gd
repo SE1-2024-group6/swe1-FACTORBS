@@ -85,3 +85,4 @@ func UpdateScore(amount=1):
 
 func _on_snake_timer_timeout() -> void:
 	call_deferred("SpawnSnake")
+	
