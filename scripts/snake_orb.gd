@@ -21,8 +21,9 @@ func _process(_delta: float) -> void:
 func UpdateProgress(change) -> void:
 	buffered_progress += change
 	progress_ratio = max(0, buffered_progress)
-	if progress_ratio == 1:
-		Snake.GameOver()
 
-func Collide(number) -> void:
-	Snake.Collision(number, index)
+func Collide(source) -> void:
+	if index == 0 and source is not int:
+		Snake.Merge(source.get_parent())
+	else:
+		Snake.Collision(source, index)
