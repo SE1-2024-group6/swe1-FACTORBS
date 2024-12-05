@@ -12,12 +12,12 @@ var num_snakes: int:
 	get: return len(terrarium)
 var ValidNumbers = []
 var Random = RandomNumberGenerator.new()
-var TimerLength = 24
+var TimerLength = 21
 
 func SpawnSnake() -> void:
 	if (!SnakeTimer.is_stopped()):
 		SnakeTimer.stop()
-	SnakeTimer.start(TimerLength+3*difficulty_ratio)
+	SnakeTimer.start(TimerLength+10*difficulty_ratio)
 	var NewSnake = load("res://scenes/Snake.tscn").instantiate()
 	add_child(NewSnake)
 	terrarium.append(NewSnake)
@@ -27,8 +27,14 @@ func SpawnSnake() -> void:
 
 func GenerateNumbers():
 	var SnakeNumbers = []
-	for i in range(4+int(2*difficulty_ratio)): # make variable when difficulty is implemented
-		SnakeNumbers.append(ValidNumbers[Random.randi_range(0, 20+(40*difficulty_ratio))]) #also make difficulty variable
+	var SnakeLength = 4
+	if current_score > 60:
+		SnakeLength = 6
+	elif current_score > 20:
+		SnakeLength = 5
+	#for i in range(4+int(2*difficulty_ratio)):
+	for i in range(SnakeLength):
+		SnakeNumbers.append(ValidNumbers[Random.randi_range(0, 20+(40*difficulty_ratio))])
 	return SnakeNumbers
 
 func GetRandomSnormber():

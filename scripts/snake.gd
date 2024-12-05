@@ -6,7 +6,7 @@ var body:
 	get: return get_children()
 var length:
 	get: return get_child_count()
-var base_speed = 0.000075
+var base_speed = 0.00009
 var orb_spacing = 0.0165
 
 func Generate(numbers, path=curve) -> void:
@@ -31,7 +31,7 @@ func UpdatePosition() -> void:
 	progress_modifier = 3.3*(1-progress_modifier)
 	progress_modifier = progress_modifier * progress_modifier 
 	for orb in body:
-		orb.UpdateProgress((base_speed+base_speed*GameMaster.difficulty_ratio*0.6)*(1+progress_modifier))
+		orb.UpdateProgress((base_speed+base_speed*GameMaster.difficulty_ratio*0.5)*(1+progress_modifier))
 
 func Collision(divisor, index):
 	var value = body[index].number	# value = number of orb at index
