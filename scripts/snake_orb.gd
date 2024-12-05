@@ -21,6 +21,13 @@ func _process(_delta: float) -> void:
 func UpdateProgress(change) -> void:
 	buffered_progress += change
 	progress_ratio = max(0, buffered_progress)
+	if progress_ratio == 1:
+		Snake.GameOver()
 
 func Collide(number) -> void:
 	Snake.Collision(number, index)
+
+func _on_snake_collision(area: Area2D) -> void:
+	if index == (Snake.length - 1) and area.get_parent().is_in_group("SnakeOrbs"):
+		Snake.Merge(area.get_parent().Snake)
+		
