@@ -19,8 +19,7 @@ func Generate(numbers, path=curve) -> void:
 func AddOrb(number, index) -> void:
 	var NewOrb = load("res://scenes/SnakeOrb.tscn").instantiate()
 	add_child(NewOrb)
-	if index > 0 and index < length:
-		move_child(NewOrb, index)
+	move_child(NewOrb, index)
 	NewOrb.number = number
 
 # Currently set to 500% base_speed at start of track and 100% at end with exponential scaling
@@ -65,19 +64,22 @@ func DeleteSnorb(index):
 		body[i].UpdateProgress(-orb_spacing)
 
 func InsertSnorb(number, index):
+	index += 1
 	AddOrb(number, index)
-	if index < length-1:
+	if index < length - 1:
 		body[index].UpdateProgress(body[index+1].progress_ratio)
 		for i in range(index+1, length):
 			body[i].UpdateProgress(orb_spacing)
+	else:
+		body[index].UpdateProgress(body[index-1].progress_ratio + orb_spacing)
 
 # Merge another snake into this one
 func Merge(OtherSnake):
 	if self == OtherSnake:
 		return
 	# Insert all orbs from OtherSnake into this Snake.
-	for orb in OtherSnake.body:
-		call_deferred("AddSnorb", orb.number, -1)
+	for i in range(OtherSnake.length - 1, -1, -1):
+		call_deferred("InsertSnorb", OtherSnake.body[i].number, length-1)
 	# Remove old snake
 	GameMaster.call_deferred("DeleteSnake", OtherSnake)
 
