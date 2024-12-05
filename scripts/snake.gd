@@ -11,6 +11,7 @@ var orb_spacing = 0.0165
 
 func Generate(numbers, path=curve) -> void:
 	curve = path
+	# Add body
 	for i in numbers:
 		AddOrb(i, 0)
 	for j in range(length):
@@ -70,14 +71,15 @@ func InsertSnorb(number, index):
 		for i in range(index+1, length):
 			body[i].UpdateProgress(orb_spacing)
 
-func GameOver():
-	GameMaster.GameOver()
+func Merge(source):
+	for orb in source.body():
+		AddOrb(orb.number, 0)
+		body[0].buffered_progress = body[1].buffered_progress - orb_spacing
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameMaster = get_parent()
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
