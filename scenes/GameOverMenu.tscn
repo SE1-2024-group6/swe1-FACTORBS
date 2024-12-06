@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgtlnb811ctbi"]
+[gd_scene load_steps=11 format=3 uid="uid://cgtlnb811ctbi"]
 
 [ext_resource type="Script" path="res://scripts/game_over_menu.gd" id="1_17rwi"]
 [ext_resource type="Shader" path="res://pause_menu.gdshader" id="1_fm8kx"]
@@ -9,6 +9,14 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oiprk"]
 shader = ExtResource("1_fm8kx")
 shader_parameter/amount = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_y0lvc"]
+font_size = 33
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2g0d6"]
+font_size = 33
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht323"]
 
@@ -34,28 +42,67 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="hsLabel" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 180.0
+offset_bottom = -432.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "High Score:"
+label_settings = SubResource("LabelSettings_y0lvc")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="sLabel" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 260.0
+offset_bottom = -352.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Your Score Was:"
+label_settings = SubResource("LabelSettings_2g0d6")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
 [node name="restart" type="Button" parent="."]
+layout_mode = 0
 offset_left = 439.0
-offset_top = 170.0
+offset_top = 345.0
 offset_right = 1047.0
-offset_bottom = 378.0
+offset_bottom = 553.0
 scale = Vector2(0.45, 0.45)
 theme_override_styles/hover = SubResource("StyleBoxFlat_ht323")
 icon = ExtResource("4_ukmjm")
+metadata/_edit_lock_ = true
 
 [node name="mainMenu" type="Button" parent="."]
+layout_mode = 0
 offset_left = 439.0
-offset_top = 305.0
+offset_top = 475.0
 offset_right = 1047.0
-offset_bottom = 513.0
+offset_bottom = 683.0
 scale = Vector2(0.45, 0.45)
 theme_override_styles/hover = SubResource("StyleBoxFlat_sqn5d")
 icon = ExtResource("3_17yrg")
+metadata/_edit_lock_ = true
 
 [node name="GameOverText" type="Sprite2D" parent="."]
 position = Vector2(528, 97)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("5_g7hhb")
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="mainMenu" to="." method="_on_main_menu_pressed"]

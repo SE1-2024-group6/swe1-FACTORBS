@@ -4,9 +4,13 @@ var Path: Curve2D = preload("res://resources/Path1.tres")
 @onready var score_label = $"Score"
 @onready var SnakeTimer = $"SnakeTimer"
 @onready var Game_over_menu = $"../CanvasLayer2/GameOverMenu"
+@onready var go_score = $"../CanvasLayer2/GameOverMenu/ColorRect/sLabel"
+@onready var go_hiscore = $"../CanvasLayer2/GameOverMenu/ColorRect/hsLabel"
+
 signal gameOver()
 
 var current_score = 0
+var high_score = 0
 # var previous_score = -1
 var difficulty_ratio = 0
 var terrarium = []
@@ -63,10 +67,35 @@ func DeleteSnake(DeadSnake):
 
 func GameOver():
 	get_tree().paused = true
+	
+#Score Labels
+	if current_score > high_score:
+		go_hiscore.text = "NEW RECORD! YOUR NEW HIGH SCORE IS: " + str(current_score)
+		go_score.text = "WOW! You beat your old record of " + str(high_score) + "! Outstanding Job!"
+		high_score = current_score
+		save_high_score()
+	else:
+		go_hiscore.text = "Your All-Time High Score is: " + str(high_score)
+		
+		#values for the score statements can be changed
+		if current_score == 0:
+			go_score.text = "Better Luck Next Time! Your Score Was: "
+		elif current_score < 50:
+			go_score.text = "Good Work! Your Score Was: "
+		elif current_score < 100:
+			go_score.text = "Awesome Job! Your Score Was: "
+		else:
+			go_score.text = "Amazing Stuff! Your Score Was: "
+		
+		# Append score
+		go_score.text += str(current_score)
+	
 	Game_over_menu.show()
 	gameOver.emit()
 
+
 func _ready() -> void:
+	load_high_score()
 	Game_over_menu.hide()
 	Random.randomize()
 	score_label.text = " SCORE: 0" 
@@ -75,18 +104,6 @@ func _ready() -> void:
 		if not i in Primes:
 			ValidNumbers.append(i) # This is an awful idea, if anyone has a better one please implement it
 	SpawnSnake()
-
-#func _process(_delta: float) -> void:
-#	update_score()
-
-# function to update score only when it changes (instead of every frame)
-# 
-#		Nate here, this is kind of pointless so I replaced it
-#
-#func update_score() -> void:
-#	if current_score != previous_score:
-#		score_label.text = " SCORE: " + str(current_score)
-#		previous_score = current_score
 
 func UpdateScore(amount=1):
 	current_score += amount
@@ -98,4 +115,19 @@ func UpdateScore(amount=1):
 
 func _on_snake_timer_timeout() -> void:
 	call_deferred("SpawnSnake")
+
+# Save/Load Functionality
+func save_high_score():
+	var file = FileAccess.open("user://save_game.json", FileAccess.WRITE)
+	var save_data: Dictionary = {"high_score": high_score}
+	var jstr = JSON.stringify(save_data)
+	file.store_line(jstr)
 	
+func load_high_score():
+	if FileAccess.file_exists("user://save_game.json"):
+		var file = FileAccess.open("user://save_game.json", FileAccess.READ)
+		if FileAccess.file_exists("user://save_game.json") == true:
+			if not file.eof_reached():
+				var current_line = JSON.parse_string(file.get_line())
+				if current_line:
+					high_score = current_line["high_score"]

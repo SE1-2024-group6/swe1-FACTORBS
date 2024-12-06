@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cgtlnb811ctbi" path="res://scenes/GameOverMenu.tscn" id="6_xnw7r"]
 [ext_resource type="PackedScene" uid="uid://dhuka1huwx0ds" path="res://scenes/AudioManager.tscn" id="7_q80rb"]
 
+
 [node name="Game" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
