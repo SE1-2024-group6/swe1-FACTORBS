@@ -52,6 +52,7 @@ process_mode = 3
 
 [node name="AudioManager" parent="." instance=ExtResource("7_q80rb")]
 
+[connection signal="gameOver" from="GameMaster" to="AudioManager" method="_on_game_master_game_over"]
 [connection signal="timeout" from="GameMaster/SnakeTimer" to="GameMaster" method="_on_snake_timer_timeout"]
 [connection signal="FireCannon" from="Cannon" to="AudioManager" method="_on_cannon_fire_cannon"]
 [connection signal="buttonPress" from="CanvasLayer/PauseMenu" to="AudioManager" method="_on_pause_menu_button_press"]

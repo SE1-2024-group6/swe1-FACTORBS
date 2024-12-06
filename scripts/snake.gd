@@ -31,7 +31,7 @@ func AddOrb(number, index) -> void:
 # Mess around with this and find values you think are fun
 func UpdatePosition() -> void: 
 	var progress_modifier = body[length-1].progress_ratio
-	progress_modifier = 3.3*(1-progress_modifier)
+	progress_modifier = 3.5*(1-progress_modifier)
 	progress_modifier = progress_modifier * progress_modifier 
 	for orb in body:
 		orb.UpdateProgress((base_speed+base_speed*GameMaster.difficulty_ratio*0.5)*(1+progress_modifier))
