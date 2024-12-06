@@ -2,11 +2,7 @@ extends Control
 
 @onready var game = $"../../Cannon"
 @onready var menu = get_parent()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
+@onready var cr = $ColorRect
 
 func _on_main_menu_pressed() -> void:
 	game.toggle_pause()

@@ -42,7 +42,7 @@ theme_override_constants/separation = 10
 
 [node name="masterVolume" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Master Volume Placeholder"
+text = "Master Volume"
 horizontal_alignment = 1
 
 [node name="master_slider" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_lewk4")]
@@ -55,7 +55,7 @@ layout_mode = 2
 
 [node name="musicVolume" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Music Volume Placeholder"
+text = "Music Volume"
 horizontal_alignment = 1
 
 [node name="music_slider" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_lewk4")]
@@ -68,7 +68,7 @@ layout_mode = 2
 
 [node name="sfxVolume" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "SFX Volume Placeholder"
+text = "SFX Volume"
 horizontal_alignment = 1
 
 [node name="sfx_slider" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_lewk4")]
