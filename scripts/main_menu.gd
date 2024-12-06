@@ -5,11 +5,10 @@ extends Control
 
 
 func _ready() -> void:
-	var gameVolume = 1
-	var sfxVolume = 1
-	#ALSO ADD CODE FETCHING VOLUME HERE
-	buttonPress.volume_db = -5 - 30*(1-(gameVolume*sfxVolume))
-	if gameVolume == 0:
+	Utils.load_settings()
+
+	buttonPress.volume_db = -5 - 30*(1-(Global.master_volume*Global.sfx_volume))
+	if Global.master_volume == 0 or Global.sfx_volume == 0:
 		buttonPress.volume_db = -60
 
 func _on_quit_button_pressed() -> void:

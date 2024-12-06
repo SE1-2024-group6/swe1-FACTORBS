@@ -10,8 +10,6 @@ var Path: Curve2D = preload("res://resources/Path1.tres")
 signal gameOver()
 
 var current_score = 0
-var high_score = 0
-# var previous_score = -1
 var difficulty_ratio = 0
 var terrarium = []
 var num_snakes: int:
@@ -69,13 +67,13 @@ func GameOver():
 	get_tree().paused = true
 	
 #Score Labels
-	if current_score > high_score:
+	if current_score > Global.high_score:
 		go_hiscore.text = "NEW RECORD! YOUR NEW HIGH SCORE IS: " + str(current_score)
-		go_score.text = "WOW! You beat your old record of " + str(high_score) + "! Outstanding Job!"
-		high_score = current_score
-		save_high_score()
+		go_score.text = "WOW! You beat your old record of " + str(Global.high_score) + "! Outstanding Job!"
+		Global.high_score = current_score
+		Utils.save_high_score()
 	else:
-		go_hiscore.text = "Your All-Time High Score is: " + str(high_score)
+		go_hiscore.text = "Your All-Time High Score is: " + str(Global.high_score)
 		
 		#values for the score statements can be changed
 		if current_score == 0:
@@ -95,7 +93,7 @@ func GameOver():
 
 
 func _ready() -> void:
-	load_high_score()
+	Utils.load_high_score()
 	Game_over_menu.hide()
 	Random.randomize()
 	score_label.text = " SCORE: 0" 
@@ -115,19 +113,3 @@ func UpdateScore(amount=1):
 
 func _on_snake_timer_timeout() -> void:
 	call_deferred("SpawnSnake")
-
-# Save/Load Functionality
-func save_high_score():
-	var file = FileAccess.open("user://save_game.json", FileAccess.WRITE)
-	var save_data: Dictionary = {"high_score": high_score}
-	var jstr = JSON.stringify(save_data)
-	file.store_line(jstr)
-	
-func load_high_score():
-	if FileAccess.file_exists("user://save_game.json"):
-		var file = FileAccess.open("user://save_game.json", FileAccess.READ)
-		if FileAccess.file_exists("user://save_game.json") == true:
-			if not file.eof_reached():
-				var current_line = JSON.parse_string(file.get_line())
-				if current_line:
-					high_score = current_line["high_score"]

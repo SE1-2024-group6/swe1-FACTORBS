@@ -5,11 +5,13 @@ extends Control
 
 
 func _ready() -> void:
-	var gameVolume = 1
-	var sfxVolume = 1
-	#ALSO ADD CODE FETCHING VOLUME HERE
-	buttonPress.volume_db = -5 - 30*(1-(gameVolume*sfxVolume))
-	if gameVolume == 0:
+	Utils.load_settings()
+	$MarginContainer/VBoxContainer/VBoxContainer/master_slider.value = Global.master_volume
+	$MarginContainer/VBoxContainer/VBoxContainer/sfx_slider.value = Global.sfx_volume
+	$MarginContainer/VBoxContainer/VBoxContainer/music_slider.value = Global.music_volume
+	
+	buttonPress.volume_db = -5 - 30*(1-(Global.master_volume*Global.sfx_volume))
+	if Global.master_volume == 0 or Global.sfx_volume == 0:
 		buttonPress.volume_db = -60
 
 func _on_main_menu_button_pressed() -> void:

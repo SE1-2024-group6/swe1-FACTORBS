@@ -16,6 +16,11 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://assets/icon.png"
 config/windows_native_icon="res://assets/icon.ico"
 
+[autoload]
+
+Global="*res://scripts/Global/global.gd"
+Utils="*res://scripts/Global/utils.gd"
+
 [input]
 
 pause={
