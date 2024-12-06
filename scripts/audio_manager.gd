@@ -20,3 +20,15 @@ func _on_cannon_fire_cannon() -> void:
 
 func _on_game_master_game_over() -> void:
 	gameOver.play()
+
+
+func _on_button_pressed() -> void:
+	buttonPress.play()
+
+
+func _on_pause_menu_button_press() -> void:
+	buttonPress.play()
+
+
+func _on_game_over_menu_button_press() -> void:
+	buttonPress.play()
