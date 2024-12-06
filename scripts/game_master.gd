@@ -7,6 +7,8 @@ var Path: Curve2D = preload("res://resources/Path1.tres")
 @onready var go_score = $"../CanvasLayer2/GameOverMenu/ColorRect/sLabel"
 @onready var go_hiscore = $"../CanvasLayer2/GameOverMenu/ColorRect/hsLabel"
 
+signal gameOver()
+
 var current_score = 0
 var high_score = 0
 # var previous_score = -1
@@ -89,7 +91,8 @@ func GameOver():
 		go_score.text += str(current_score)
 	
 	Game_over_menu.show()
-	
+	gameOver.emit()
+
 
 func _ready() -> void:
 	load_high_score()

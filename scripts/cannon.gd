@@ -7,9 +7,10 @@ extends Node2D
 @onready var GameMaster = $"../GameMaster"
 var paused = false
 var angle = 0.0
-var cooldown_time = 0.7
+var cooldown_time = 0.6
 var on_cooldown = false
 var Random = RandomNumberGenerator.new()
+signal FireCannon()
 
 # Generate ammo
 func GenerateAmmoNumber() -> int:
@@ -50,6 +51,8 @@ func Fire() -> void:
 	on_cooldown = true
 	get_tree().create_timer(cooldown_time).timeout.connect(func(): on_cooldown = false)
 	
+	#play sfx
+	FireCannon.emit()
 
 func OrientCannon() -> void:
 	angle = global_position.angle_to_point(get_global_mouse_position())

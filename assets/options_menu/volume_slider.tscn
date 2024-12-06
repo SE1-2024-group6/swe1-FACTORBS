@@ -12,4 +12,5 @@ offset_right = 671.0
 offset_bottom = 224.968
 max_value = 1.0
 step = 0.001
+value = 1.0
 script = ExtResource("1_c8rvy")

@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ctfewv6bg1lvq" path="res://assets/main_menu/start_button.png" id="4_qo1rq"]
 [ext_resource type="Texture2D" uid="uid://t3pl38e2d3wb" path="res://assets/main_menu/options_button.png" id="5_wos72"]
 [ext_resource type="Texture2D" uid="uid://s53p6bfpehku" path="res://assets/main_menu/quit_button.png" id="6_w1nyv"]
+[ext_resource type="AudioStream" uid="uid://dcyb746apnsow" path="res://sounds/buttonPress.mp3" id="7_x3y7k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lwyab"]
 
@@ -97,6 +98,10 @@ icon = ExtResource("6_w1nyv")
 flat = true
 icon_alignment = 1
 expand_icon = true
+
+[node name="buttonPress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_x3y7k")
+volume_db = -4.0
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOptions/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOptions/OptionsButton" to="." method="_on_options_button_pressed"]
