@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgtlnb811ctbi"]
+[gd_scene load_steps=11 format=3 uid="uid://cgtlnb811ctbi"]
 
 [ext_resource type="Script" path="res://scripts/game_over_menu.gd" id="1_17rwi"]
 [ext_resource type="Shader" path="res://pause_menu.gdshader" id="1_fm8kx"]
@@ -9,6 +9,14 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oiprk"]
 shader = ExtResource("1_fm8kx")
 shader_parameter/amount = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_y0lvc"]
+font_size = 33
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2g0d6"]
+font_size = 33
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht323"]
 
@@ -46,6 +54,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "High Score:"
+label_settings = SubResource("LabelSettings_y0lvc")
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
@@ -62,6 +71,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "Your Score Was:"
+label_settings = SubResource("LabelSettings_2g0d6")
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true

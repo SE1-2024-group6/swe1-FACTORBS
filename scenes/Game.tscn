@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dnnlb6wkghg63" path="res://scenes/Cannon.tscn" id="4_glvar"]
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="5_hxki1"]
 [ext_resource type="PackedScene" uid="uid://bkbe455gnn8t3" path="res://scenes/PauseMenu.tscn" id="6_8gwbn"]
-[ext_resource type="PackedScene" path="res://scenes/GameOverMenu.tscn" id="6_xnw7r"]
+[ext_resource type="PackedScene" uid="uid://cgtlnb811ctbi" path="res://scenes/GameOverMenu.tscn" id="6_xnw7r"]
 
 [node name="Game" type="Node2D"]
 
