@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhuka1huwx0ds"]
+[gd_scene load_steps=8 format=3 uid="uid://cujxtuwtyjw31"]
 
 [ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_s5lcg"]
 [ext_resource type="AudioStream" uid="uid://b4mxwdsnu7en8" path="res://sounds/FireCannon.mp3" id="2_rpcqt"]
@@ -33,3 +33,4 @@ volume_db = -4.0
 
 [node name="wrongBuzz" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_rw7u4")
+volume_db = 4.728

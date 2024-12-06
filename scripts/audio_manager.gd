@@ -4,8 +4,17 @@ extends Node2D
 @onready var buttonPress = $"buttonPress"
 @onready var gameOver = $"gameOver"
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var gameVolume = 1
+	var sfxVolume = 1
+	# PUT CODE FETCHING VOLUME HERE!!!
+	for i in get_children():
+		i.volume_db = -5 - 30*(1-(gameVolume*sfxVolume))
+		if gameVolume == 0:
+			i.volume_db = -60
+	$"wrongBuzz".volume_db += 10
 	pass # Replace with function body.
 
 
