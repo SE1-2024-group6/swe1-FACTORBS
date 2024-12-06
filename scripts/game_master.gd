@@ -18,12 +18,12 @@ var num_snakes: int:
 	get: return len(terrarium)
 var ValidNumbers = []
 var Random = RandomNumberGenerator.new()
-var TimerLength = 21
+var TimerLength = 20
 
 func SpawnSnake() -> void:
 	if (!SnakeTimer.is_stopped()):
 		SnakeTimer.stop()
-	SnakeTimer.start(TimerLength+10*difficulty_ratio)
+	SnakeTimer.start(TimerLength+9.5*difficulty_ratio)
 	var NewSnake = load("res://scenes/Snake.tscn").instantiate()
 	add_child(NewSnake)
 	terrarium.append(NewSnake)

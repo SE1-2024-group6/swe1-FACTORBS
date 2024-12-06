@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cujxtuwtyjw31"]
+[gd_scene load_steps=9 format=3 uid="uid://cujxtuwtyjw31"]
 
 [ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_s5lcg"]
 [ext_resource type="AudioStream" uid="uid://b4mxwdsnu7en8" path="res://sounds/FireCannon.mp3" id="2_rpcqt"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dw3cwh2741ps6" path="res://sounds/gameOver.mp3" id="5_gl4sl"]
 [ext_resource type="AudioStream" uid="uid://sqsrd1m61xq4" path="res://sounds/successfulFactoring.mp3" id="6_g8sx7"]
 [ext_resource type="AudioStream" uid="uid://cwisjlfwbg8xh" path="res://sounds/wrongBuzz.mp3" id="7_rw7u4"]
+[ext_resource type="AudioStream" uid="uid://dafgwg1tihtfb" path="res://sounds/music.mp3" id="8_apj1o"]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_s5lcg")
@@ -34,3 +35,11 @@ volume_db = -4.0
 [node name="wrongBuzz" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_rw7u4")
 volume_db = 4.728
+
+[node name="musicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_apj1o")
+
+[node name="Timer" type="Timer" parent="musicPlayer"]
+wait_time = 75.0
+
+[connection signal="timeout" from="musicPlayer/Timer" to="." method="_on_timer_timeout"]
