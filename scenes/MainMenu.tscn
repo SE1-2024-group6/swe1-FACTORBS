@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://0egodccu18mp"]
+[gd_scene load_steps=9 format=3 uid="uid://0egodccu18mp"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_6jm41"]
 [ext_resource type="Texture2D" uid="uid://mwvav080o7vs" path="res://assets/main_menu/title.png" id="2_bs1og"]
+[ext_resource type="Texture2D" uid="uid://b5afey2hl0n03" path="res://assets/background.png" id="2_j8sp2"]
 [ext_resource type="StyleBox" uid="uid://bs1vtn8wqnfv6" path="res://highlight.tres" id="3_xx8pg"]
 [ext_resource type="Texture2D" uid="uid://ctfewv6bg1lvq" path="res://assets/main_menu/start_button.png" id="4_qo1rq"]
 [ext_resource type="Texture2D" uid="uid://t3pl38e2d3wb" path="res://assets/main_menu/options_button.png" id="5_wos72"]
@@ -17,6 +18,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6jm41")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("2_j8sp2")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
