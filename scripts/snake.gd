@@ -1,6 +1,9 @@
 extends Path2D
 
 @onready var GameMaster = get_parent()
+@onready var clearingOrbs = $"../../AudioManager/clearingOrbs"
+@onready var successfulFactoring = $"../../AudioManager/successfulFactoring"
+@onready var wrongBuzz = $"../../AudioManager/wrongBuzz"
 
 var body:
 	get: return get_children()
@@ -42,8 +45,12 @@ func Collision(divisor, index):
 			iter += 1
 		FactorSnorb(divisor, iter)
 		if value/divisor != 1:
+			successfulFactoring.play()
 			call_deferred("InsertSnorb", int(value)/int(divisor), index)
+		else:
+			clearingOrbs.play()
 	else:	# if the divisor isn't a factor of the orb hit
+		wrongBuzz.play()
 		call_deferred("InsertSnorb", divisor, index)	# insert it into the snake
 
 func FactorSnorb(divisor, index):
@@ -91,6 +98,7 @@ func GameOver():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameMaster = get_parent()
+	
 	pass # Replace with function body.
 
 

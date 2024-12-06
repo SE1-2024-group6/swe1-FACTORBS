@@ -1,11 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbgl5v0h3ed88"]
+[gd_scene load_steps=14 format=3 uid="uid://cbgl5v0h3ed88"]
 
 [ext_resource type="Texture2D" uid="uid://ccmfwm8nnog1m" path="res://assets/game/path1.png" id="1_0hp1r"]
 [ext_resource type="Script" path="res://scripts/game_master.gd" id="3_8pvaq"]
 [ext_resource type="PackedScene" uid="uid://dnnlb6wkghg63" path="res://scenes/Cannon.tscn" id="4_glvar"]
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="5_hxki1"]
 [ext_resource type="PackedScene" uid="uid://bkbe455gnn8t3" path="res://scenes/PauseMenu.tscn" id="6_8gwbn"]
-[ext_resource type="PackedScene" path="res://scenes/GameOverMenu.tscn" id="6_xnw7r"]
+[ext_resource type="PackedScene" uid="uid://cgtlnb811ctbi" path="res://scenes/GameOverMenu.tscn" id="6_xnw7r"]
+[ext_resource type="Script" path="res://scripts/audio_manager.gd" id="7_hav3s"]
+[ext_resource type="AudioStream" uid="uid://b4mxwdsnu7en8" path="res://sounds/FireCannon.mp3" id="7_if70q"]
+[ext_resource type="AudioStream" uid="uid://dcyb746apnsow" path="res://sounds/buttonPress.mp3" id="9_otjrd"]
+[ext_resource type="AudioStream" uid="uid://oi7sn0p0kd2h" path="res://sounds/clearingOrbs.mp3" id="10_e3uxn"]
+[ext_resource type="AudioStream" uid="uid://dw3cwh2741ps6" path="res://sounds/gameOver.mp3" id="11_2ld1e"]
+[ext_resource type="AudioStream" uid="uid://sqsrd1m61xq4" path="res://sounds/successfulFactoring.mp3" id="12_bwdt8"]
+[ext_resource type="AudioStream" uid="uid://cwisjlfwbg8xh" path="res://sounds/wrongBuzz.mp3" id="13_xstwp"]
 
 [node name="Game" type="Node2D"]
 
@@ -49,5 +56,33 @@ process_mode = 3
 
 [node name="GameOverMenu" parent="CanvasLayer2" instance=ExtResource("6_xnw7r")]
 
+[node name="AudioManager" type="Node2D" parent="."]
+script = ExtResource("7_hav3s")
+
+[node name="FireCannon" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("7_if70q")
+volume_db = -5.0
+
+[node name="buttonPress" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("9_otjrd")
+volume_db = -5.0
+
+[node name="clearingOrbs" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("10_e3uxn")
+volume_db = -4.0
+
+[node name="gameOver" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("11_2ld1e")
+volume_db = -4.0
+
+[node name="successfulFactoring" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("12_bwdt8")
+volume_db = -4.0
+
+[node name="wrongBuzz" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("13_xstwp")
+
+[connection signal="gameOver" from="GameMaster" to="AudioManager" method="_on_game_master_game_over"]
 [connection signal="timeout" from="GameMaster/SnakeTimer" to="GameMaster" method="_on_snake_timer_timeout"]
+[connection signal="FireCannon" from="Cannon" to="AudioManager" method="_on_cannon_fire_cannon"]
 [connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer" method="_on_button_pressed"]

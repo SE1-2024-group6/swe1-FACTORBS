@@ -4,6 +4,7 @@ var Path: Curve2D = preload("res://resources/Path1.tres")
 @onready var score_label = $"Score"
 @onready var SnakeTimer = $"SnakeTimer"
 @onready var Game_over_menu = $"../CanvasLayer2/GameOverMenu"
+signal gameOver()
 
 var current_score = 0
 # var previous_score = -1
@@ -63,6 +64,7 @@ func DeleteSnake(DeadSnake):
 func GameOver():
 	get_tree().paused = true
 	Game_over_menu.show()
+	gameOver.emit()
 
 func _ready() -> void:
 	Game_over_menu.hide()
