@@ -22,7 +22,7 @@ func SpawnSnake() -> void:
 	if (!SnakeTimer.is_stopped()):
 		SnakeTimer.stop()
 	SnakeTimer.start(TimerLength+9.5*difficulty_ratio)
-	var NewSnake = load("res://scenes/Snake.tscn").instantiate()
+	var NewSnake = load("res://scenes/snake.tscn").instantiate()
 	add_child(NewSnake)
 	terrarium.append(NewSnake)
 	NewSnake.Generate(GenerateNumbers(), Path)
@@ -48,6 +48,7 @@ func GetRandomSnormber():
 	elif num_snakes > 1:
 		SnakeSelect = terrarium[Random.randi_range(1, num_snakes)-1]
 	else:
+		SpawnSnake()
 		return 2
 	return SnakeSelect.body[(Random.randi_range(1, SnakeSelect.length)-1)].number
 
@@ -71,7 +72,7 @@ func GameOver():
 		go_hiscore.text = "NEW RECORD! YOUR NEW HIGH SCORE IS: " + str(current_score)
 		go_score.text = "WOW! You beat your old record of " + str(Global.high_score) + "! Outstanding Job!"
 		Global.high_score = current_score
-		# Utils.save_high_score()
+		Utils.save_high_score()
 	else:
 		go_hiscore.text = "Your All-Time High Score is: " + str(Global.high_score)
 		
@@ -93,7 +94,7 @@ func GameOver():
 
 
 func _ready() -> void:
-	# Utils.load_high_score()
+	Utils.load_high_score()
 	Game_over_menu.hide()
 	Random.randomize()
 	score_label.text = " SCORE: 0" 
