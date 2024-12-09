@@ -71,7 +71,7 @@ func GameOver():
 		go_hiscore.text = "NEW RECORD! YOUR NEW HIGH SCORE IS: " + str(current_score)
 		go_score.text = "WOW! You beat your old record of " + str(Global.high_score) + "! Outstanding Job!"
 		Global.high_score = current_score
-		Utils.save_high_score()
+		# Utils.save_high_score()
 	else:
 		go_hiscore.text = "Your All-Time High Score is: " + str(Global.high_score)
 		
@@ -93,7 +93,7 @@ func GameOver():
 
 
 func _ready() -> void:
-	Utils.load_high_score()
+	# Utils.load_high_score()
 	Game_over_menu.hide()
 	Random.randomize()
 	score_label.text = " SCORE: 0" 
